@@ -117,6 +117,30 @@ const verifier = (() => {
             </div>
           </div>`;
 
+        // Build TSA token row
+        const tsaRow = payload.tsaToken
+          ? `<div class="detail-row">
+              <span class="detail-icon">🔏</span>
+              <div class="detail-content">
+                <span class="detail-label">RFC 3161 Timestamp Token</span>
+                <span class="detail-value tsa-present">
+                  Present — issued by FreeTSA.org
+                  <span class="tsa-hint">
+                    Verify offline with OpenSSL:<br>
+                    <code>echo "${escHtml(payload.tsaToken)}" | base64 -d &gt; token.tsr</code><br>
+                    <code>openssl ts -verify -in token.tsr -digest ${escHtml(payload.digest)} -sha256 -CAfile cacert.pem</code>
+                  </span>
+                </span>
+              </div>
+            </div>`
+          : `<div class="detail-row">
+              <span class="detail-icon">⚠️</span>
+              <div class="detail-content">
+                <span class="detail-label">RFC 3161 Timestamp Token</span>
+                <span class="detail-value tsa-absent">Not present — TSA was unreachable at generation time</span>
+              </div>
+            </div>`;
+
         detailsEl.innerHTML =
           row('👤', 'Name',       payload.name) +
           row('📋', 'Quiz',       payload.quiz) +
@@ -129,7 +153,8 @@ const verifier = (() => {
               <span class="detail-value">${passBadge}</span>
             </div>
           </div>` +
-          row('🔑', 'SHA-256 Digest', payload.digest, 'digest-row');
+          row('🔑', 'SHA-256 Digest', payload.digest, 'digest-row') +
+          tsaRow;
 
         rawEl.textContent = JSON.stringify(payload, null, 2);
       } else {

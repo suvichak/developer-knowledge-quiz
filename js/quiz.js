@@ -334,10 +334,27 @@ const engine = (() => {
 
     const btn = el('btn-gen-token');
     btn.disabled = true;
-    btn.textContent = 'Generating…';
 
     try {
-      const token = await buildToken(name, _lastResult);
+      // ─ Step 1: hash the canonical payload ──────────────────
+      btn.textContent = 'Hashing…';
+      const { quizTitle, score, correct, total, passed } = _lastResult;
+      const v  = 1;
+      const ts = new Date().toISOString();
+      const canonical = [v, quizTitle, name, ts, score, correct, total, passed ? '1' : '0'].join('|');
+      const hashBuf   = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(canonical));
+      const hashBytes = new Uint8Array(hashBuf);
+      const digest    = Array.from(hashBytes).map(b => b.toString(16).padStart(2, '0')).join('');
+
+      // ─ Step 2: send hash to public RFC 3161 TSA ────────────
+      btn.textContent = 'Timestamping via FreeTSA…';
+      const tsaToken = await fetchTimestamp(hashBytes);
+
+      // ─ Step 3: assemble and Base64-encode payload ──────────
+      btn.textContent = 'Building token…';
+      const payload = { v, quiz: quizTitle, name, ts, score, correct, total, passed, digest, tsaToken };
+      const token   = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+
       el('token-box').value = token;
       const verifyUrl = `verify.html?token=${encodeURIComponent(token)}`;
       el('token-verify-link').href = verifyUrl;
@@ -391,32 +408,87 @@ function animateCountUp(el, from, to, duration, format) {
 engine.load();
 
 /* ─────────────────────────────────────────────────────────────
-   Quiz Success Token
+   RFC 3161 Timestamp helpers
+   Builds a minimal DER-encoded TimeStampReq and calls FreeTSA.org.
 ───────────────────────────────────────────────────────────── */
 
+/** Concatenate Uint8Arrays */
+function _u8concat(...arrays) {
+  const total = arrays.reduce((s, a) => s + a.length, 0);
+  const out = new Uint8Array(total);
+  let off = 0;
+  for (const a of arrays) { out.set(a, off); off += a.length; }
+  return out;
+}
+
+/** DER length encoding */
+function _derLen(n) {
+  if (n < 128) return new Uint8Array([n]);
+  if (n < 256) return new Uint8Array([0x81, n]);
+  return new Uint8Array([0x82, (n >> 8) & 0xff, n & 0xff]);
+}
+
+/** Wrap content bytes in a DER SEQUENCE (tag 0x30) */
+function _derSeq(content) {
+  const lenBytes = _derLen(content.length);
+  const out = new Uint8Array(1 + lenBytes.length + content.length);
+  out[0] = 0x30;
+  out.set(lenBytes, 1);
+  out.set(content, 1 + lenBytes.length);
+  return out;
+}
+
 /**
- * Build a tamper-evident Quiz Success Token.
- * Payload fields are joined into a canonical string and hashed with
- * SHA-256 (Web Crypto API). The full payload + digest is Base64 encoded.
- *
- * @param {string} name
- * @param {{ quizTitle:string, score:number, correct:number, total:number, passed:boolean }} result
- * @returns {Promise<string>} Base64 token
+ * Build a minimal RFC 3161 TimeStampReq DER structure for a SHA-256 hash.
+ * Structure: SEQUENCE { version=1, MessageImprint, nonce, certReq=TRUE }
+ * @param {Uint8Array} hashBytes  32-byte SHA-256 digest
+ * @returns {Uint8Array}
  */
-async function buildToken(name, result) {
-  const v  = 1;
-  const ts = new Date().toISOString();
-  const { quizTitle, score, correct, total, passed } = result;
+function buildTsq(hashBytes) {
+  // SHA-256 AlgorithmIdentifier OID: 2.16.840.1.101.3.4.2.1
+  const oid   = new Uint8Array([0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01]);
+  const algId = _derSeq(_u8concat(oid, new Uint8Array([0x05, 0x00])));        // AlgorithmIdentifier
+  const octet = _u8concat(new Uint8Array([0x04, 0x20]), hashBytes);           // OCTET STRING (32 bytes)
+  const msgImp = _derSeq(_u8concat(algId, octet));                            // MessageImprint
 
-  // Canonical string — order and separator must match verify.js exactly
-  const canonical = [v, quizTitle, name, ts, score, correct, total, passed ? '1' : '0'].join('|');
-  const msgBuf  = new TextEncoder().encode(canonical);
-  const hashBuf = await crypto.subtle.digest('SHA-256', msgBuf);
-  const digest  = Array.from(new Uint8Array(hashBuf))
-    .map(b => b.toString(16).padStart(2, '0')).join('');
+  const version = new Uint8Array([0x02, 0x01, 0x01]);                        // INTEGER v1
 
-  const payload = { v, quiz: quizTitle, name, ts, score, correct, total, passed, digest };
-  return btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+  // Nonce: 8 random bytes as positive INTEGER (0x00 prefix avoids sign bit)
+  const nonceVal = crypto.getRandomValues(new Uint8Array(8));
+  const nonce    = _u8concat(new Uint8Array([0x02, 0x09, 0x00]), nonceVal);
+
+  const certReq  = new Uint8Array([0x01, 0x01, 0xff]);                       // BOOLEAN TRUE
+
+  return _derSeq(_u8concat(version, msgImp, nonce, certReq));
+}
+
+/**
+ * POST a RFC 3161 timestamp request to FreeTSA.org.
+ * Returns base64-encoded TSR (DER) on success, or null if CORS/network blocks the call.
+ * @param {Uint8Array} hashBytes
+ * @returns {Promise<string|null>}
+ */
+async function fetchTimestamp(hashBytes) {
+  try {
+    const tsq  = buildTsq(hashBytes);
+    const resp = await fetch('https://freetsa.org/tsr', {
+      method:  'POST',
+      headers: {
+        'Content-Type': 'application/timestamp-query',
+        'Accept':       'application/timestamp-reply',
+      },
+      body: tsq,
+    });
+    if (!resp.ok) throw new Error(`TSA returned HTTP ${resp.status}`);
+    const tsrBuf = await resp.arrayBuffer();
+    // Base64-encode the raw DER bytes
+    let bin = '';
+    new Uint8Array(tsrBuf).forEach(b => { bin += String.fromCharCode(b); });
+    return btoa(bin);
+  } catch (err) {
+    console.warn('FreeTSA request failed (CORS or network):', err.message);
+    return null;
+  }
 }
 
 function copyToken() {
