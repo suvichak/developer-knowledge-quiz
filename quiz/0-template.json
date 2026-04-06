@@ -8,18 +8,18 @@
     "language": "en"
   },
   "quiz": {
-    "title": "Web Development Fundamentals",
-    "subtitle": "Core concepts every web developer should know",
+    "title": "Template Quiz: Just to see how this system work.",
+    "subtitle": "Template Quiz",
     "description": "Example quiz template with 2 sample questions. Replace these with your own questions.",
-    "category": "Web Development",
+    "category": "Template",
     "tags": [
-      "html",
-      "css",
-      "javascript",
-      "web"
+      "template1",
+      "template2",
+      "template3",
+      "template4"
     ],
     "icon": "🌐",
-    "difficulty": "mixed",
+    "difficulty": "easy",
     "estimatedMinutes": 10
   },
   "settings": {
