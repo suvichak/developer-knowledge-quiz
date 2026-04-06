@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz · Developer Knowledge</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <a class="back-btn" href="index.html" aria-label="Back to quiz list">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        All Quizzes
+      </a>
+      <div class="quiz-title-header" id="header-title"></div>
+    </div>
+  </header>
+
+  <!-- ── Progress Bar ────────────────────────────────────────── -->
+  <div id="progress-bar-wrap">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- ── Main ────────────────────────────────────────────────── -->
+  <main>
+
+    <!-- Loading -->
+    <div id="view-loading">
+      <div class="spinner"></div>
+      <p style="text-align:center;color:var(--text-secondary);">Loading quiz…</p>
+    </div>
+
+    <!-- Error -->
+    <div id="view-error" class="hidden">
+      <span class="error-icon">🔍</span>
+      <h2 class="error-title">Quiz not found</h2>
+      <p class="error-msg" id="error-msg">Could not load the requested quiz.</p>
+      <a href="index.html" class="btn btn-primary">← Back to All Quizzes</a>
+    </div>
+
+    <!-- Intro -->
+    <div id="view-intro" class="hidden fade-in">
+      <div class="intro-card">
+        <span class="intro-icon" id="intro-icon">📋</span>
+        <div class="intro-category" id="intro-category"></div>
+        <h1 class="intro-title" id="intro-title"></h1>
+        <p class="intro-desc" id="intro-desc"></p>
+        <div class="intro-stats">
+          <div class="intro-stat">
+            <span class="intro-stat-value" id="intro-q-count">—</span>
+            <span class="intro-stat-label">Questions</span>
+          </div>
+          <div class="intro-stat">
+            <span class="intro-stat-value" id="intro-time">—</span>
+            <span class="intro-stat-label">Minutes</span>
+          </div>
+          <div class="intro-stat">
+            <span class="intro-stat-value" id="intro-pass">70%</span>
+            <span class="intro-stat-label">Pass Score</span>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="engine.start()" style="width:100%;justify-content:center;font-size:17px;padding:15px;">
+          Start Quiz →
+        </button>
+      </div>
+    </div>
+
+    <!-- Question -->
+    <div id="view-question" class="hidden">
+      <div class="q-meta">
+        <span class="q-counter">
+          Question <strong id="q-num">1</strong> of <strong id="q-total">20</strong>
+        </span>
+        <span class="q-difficulty" id="q-difficulty"></span>
+      </div>
+
+      <div class="q-card fade-in" id="q-card">
+        <p class="q-text" id="q-text">Question text</p>
+        <div class="options" id="options-list"></div>
+
+        <!-- Feedback (inside card) -->
+        <div class="feedback-panel" id="feedback-panel">
+          <div class="feedback-header" id="feedback-header"></div>
+          <div class="feedback-body" id="feedback-body"></div>
+          <div class="feedback-correct-reveal hidden" id="feedback-reveal"></div>
+        </div>
+      </div>
+
+      <div class="next-wrap" id="next-wrap">
+        <button class="btn-next" id="btn-next">
+          <span id="next-label">Next Question</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M4 8h8M9 5l3 3-3 3" stroke="white" stroke-width="1.6"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="view-results" class="hidden">
+      <div class="results-header fade-in">
+        <div class="score-circle-wrap">
+          <svg class="score-svg" viewBox="0 0 160 160" aria-hidden="true">
+            <circle class="score-track" cx="80" cy="80" r="60"/>
+            <circle class="score-fill" id="score-fill"
+                    cx="80" cy="80" r="60"
+                    stroke-dasharray="376.99"
+                    stroke-dashoffset="376.99"/>
+            <text class="score-percent-text" x="80" y="76" id="score-pct-text">0%</text>
+            <text class="score-label-text" x="80" y="96" id="score-raw-text">0 / 0</text>
+          </svg>
+        </div>
+
+        <div class="results-score-line" id="results-score-line"></div>
+        <div class="results-badge" id="results-badge"></div>
+        <p class="results-message" id="results-message"></p>
+
+        <div class="results-actions">
+          <button class="btn btn-secondary" onclick="engine.retake()">↺ Retake Quiz</button>
+          <a href="index.html" class="btn btn-primary">← All Quizzes</a>
+        </div>
+      </div>
+
+      <div class="review-section fade-in">
+        <h2 class="review-title">Answer Review</h2>
+        <div class="review-list" id="review-list"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-note">
+      &copy; 2026 Developer Knowledge Quiz.
+      Pokémon names and characters are trademarks of The Pokémon Company and its affiliates.
+      All Pokémon names are &copy; Nintendo / Creatures Inc. / GAME FREAK inc.
+      Used solely for educational and non-commercial entertainment purposes.
+    </div>
+  </footer>
+
+  <script src="js/quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+/* ─── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --primary-blue:       #0072BC;
+  --primary-dark:       #18375F;
+  --accent-teal:        #00B398;
+  --accent-yellow:      #FFC627;
+  --accent-red:         #EF4A60;
+  --light-blue:         #D7EAF5;
+  --mid-blue:           #589BE5;
+
+  /* Feedback Colors */
+  --correct-bg:         #E8F7F4;
+  --correct-border:     #00B398;
+  --correct-text:       #006B5B;
+  --wrong-bg:           #FEF0F2;
+  --wrong-border:       #EF4A60;
+  --wrong-text:         #9B1C30;
+
+  /* Neutrals */
+  --bg:                 #F5F5F7;
+  --surface:            #FFFFFF;
+  --surface-2:          #FBFBFD;
+  --text-primary:       #1D1D1F;
+  --text-secondary:     #6E6E73;
+  --text-tertiary:      #A1A1A6;
+  --border:             #D2D2D7;
+  --border-light:       #E8E8ED;
+
+  /* Shadows */
+  --shadow-sm:    0 1px 4px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-md:    0 2px 12px rgba(0,0,0,0.08), 0 4px 20px rgba(0,0,0,0.05);
+  --shadow-lg:    0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-hover: 0 12px 40px rgba(0,114,188,0.14), 0 4px 12px rgba(0,0,0,0.08);
+
+  /* Sizing */
+  --radius:    16px;
+  --radius-sm: 10px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  /* Typography */
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+          "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ─── Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Utility ───────────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+.fade-in {
+  animation: fadeSlideIn 0.35s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary-blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Shared Buttons ────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background 0.18s ease, transform 0.12s ease;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--primary-blue);
+  color: #FFF;
+  font-size: 16px;
+  padding: 13px 28px;
+}
+.btn-primary:hover { background: #005fa3; }
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 15px;
+  padding: 11px 22px;
+  border: 1.5px solid var(--border);
+}
+.btn-secondary:hover { background: var(--bg); }
+
+/* ─── Back Button (quiz & prequiz pages) ────────────────────── */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px 6px 8px;
+  border-radius: 8px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.back-btn:hover { background: rgba(255,255,255,0.1); color: #FFF; }
+
+/* ─── Shared Header Base ────────────────────────────────────── */
+header {
+  background: var(--primary-dark);
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+
+/* ─── Error View ────────────────────────────────────────────── */
+.error-icon  { font-size: 56px; display: block; margin-bottom: 16px; }
+.error-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+.error-msg   { font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
+
+/* ─── Shared Footer Base ────────────────────────────────────── */
+footer {
+  background: var(--primary-dark);
+  text-align: center;
+  flex-shrink: 0;
+}

@@ -1,0 +1,18 @@
+{
+  "quizzes": [
+    {
+      "id": "template",
+      "file": "quiz/template.json",
+      "title": "Web Development Fundamentals",
+      "subtitle": "Core concepts every web developer should know",
+      "description": "Test your knowledge of HTML, CSS, JavaScript, and web development best practices.",
+      "category": "Web Development",
+      "icon": "🌐",
+      "difficulty": "mixed",
+      "questionCount": 20,
+      "estimatedMinutes": 10,
+      "tags": ["html", "css", "javascript", "web"],
+      "featured": true
+    }
+  ]
+}

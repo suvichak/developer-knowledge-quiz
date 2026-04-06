@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Knowledge Quiz</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <div class="logo-icon">🎯</div>
+        <span class="logo-text">Dev Quiz</span>
+      </a>
+      <span class="header-badge">GitHub Pages</span>
+    </div>
+  </header>
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M7 4v3.5L9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Interactive Learning
+      </div>
+      <h1 class="hero-title">
+        Developer<br><span>Knowledge Quiz</span>
+      </h1>
+      <p class="hero-sub">
+        Sharpen your skills with instant feedback on every answer.
+        Understand not just what's correct — but <em>why</em>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Main ────────────────────────────────────────────────── -->
+  <main>
+    <div class="section-header">
+      <h2 class="section-title">Available Quizzes</h2>
+      <span class="section-count" id="quiz-count">Loading…</span>
+    </div>
+
+    <div id="quiz-grid" class="quiz-grid">
+      <!-- Loading state -->
+      <div class="state-container" id="loading-state">
+        <div class="spinner"></div>
+        <p class="state-sub">Loading quizzes…</p>
+      </div>
+    </div>
+
+    <!-- How It Works -->
+    <section class="how-section">
+      <h2 class="how-title">How it works</h2>
+      <div class="how-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title">Pick a Topic</div>
+          <div class="step-desc">Choose any quiz from the list above and start when you're ready.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title">Answer Questions</div>
+          <div class="step-desc">Select one of four options for each question, one at a time.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title">Get Instant Feedback</div>
+          <div class="step-desc">See exactly why your choice was wrong and what the correct answer is.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-title">Review Your Score</div>
+          <div class="step-desc">After the last question, review all answers with full explanations.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-brand">🎯 Developer Knowledge Quiz</span>
+      <span class="footer-note">
+        &copy; 2026 Developer Knowledge Quiz.
+        Pokémon names and characters used in our quizzes are trademarks of
+        The Pokémon Company and its affiliates.
+        All Pokémon names are &copy; Nintendo / Creatures Inc. / GAME FREAK inc.
+        Used here solely for educational and non-commercial entertainment purposes.
+      </span>
+    </div>
+  </footer>
+
+  <script src="js/index.js"></script>
+</body>
+</html>

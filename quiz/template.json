@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "id": "template",
+    "version": "1.0",
+    "createdAt": "2026-04-06",
+    "updatedAt": "2026-04-06",
+    "author": "Developer Knowledge Quiz",
+    "language": "en"
+  },
+  "quiz": {
+    "title": "Web Development Fundamentals",
+    "subtitle": "Core concepts every web developer should know",
+    "description": "Example quiz template with 2 sample questions. Replace these with your own questions.",
+    "category": "Web Development",
+    "tags": [
+      "html",
+      "css",
+      "javascript",
+      "web"
+    ],
+    "icon": "🌐",
+    "difficulty": "mixed",
+    "estimatedMinutes": 10
+  },
+  "settings": {
+    "shuffleQuestions": false,
+    "shuffleOptions": false,
+    "passingScore": 70,
+    "showProgressBar": true,
+    "allowRetake": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "text": "Example Question 1: What does HTML stand for?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hyper Text Markup Language"
+        },
+        {
+          "id": "B",
+          "text": "High Tech Machine Language"
+        },
+        {
+          "id": "C",
+          "text": "Hyper Transfer Markup Language"
+        },
+        {
+          "id": "D",
+          "text": "Home Tool Markup Language"
+        }
+      ],
+      "correctAnswer": "A",
+      "explanation": "HTML stands for HyperText Markup Language. It is the standard markup language used to structure content on the web.",
+      "wrongAnswerFeedback": {
+        "B": "Incorrect. Replace this with feedback for wrong answer B.",
+        "C": "Incorrect. Replace this with feedback for wrong answer C.",
+        "D": "Incorrect. Replace this with feedback for wrong answer D."
+      },
+      "difficulty": "easy",
+      "tags": [
+        "example",
+        "html"
+      ],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+    },
+    {
+      "id": 2,
+      "text": "Example Question 2: Which CSS property controls font size?",
+      "options": [
+        {
+          "id": "A",
+          "text": "text-size"
+        },
+        {
+          "id": "B",
+          "text": "font-size"
+        },
+        {
+          "id": "C",
+          "text": "text-scale"
+        },
+        {
+          "id": "D",
+          "text": "type-size"
+        }
+      ],
+      "correctAnswer": "B",
+      "explanation": "The font-size property sets the size of the font. Replace this explanation with your own.",
+      "wrongAnswerFeedback": {
+        "A": "Incorrect. Replace this with feedback for wrong answer A.",
+        "C": "Incorrect. Replace this with feedback for wrong answer C.",
+        "D": "Incorrect. Replace this with feedback for wrong answer D."
+      },
+      "difficulty": "easy",
+      "tags": [
+        "example",
+        "css"
+      ],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/CSS/font-size"
+    }
+  ]
+}

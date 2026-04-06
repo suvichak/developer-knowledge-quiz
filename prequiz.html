@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prerequisite Review · Developer Knowledge</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/prequiz.css">
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <a class="back-btn" href="index.html" aria-label="Back to all quizzes">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        All Quizzes
+      </a>
+      <span class="header-title" id="header-title">Pre-Quiz Review</span>
+    </div>
+  </header>
+
+  <!-- ── Main ────────────────────────────────────────────────── -->
+  <main>
+
+    <!-- Loading -->
+    <div id="view-loading">
+      <div class="spinner"></div>
+      <p style="text-align:center;color:var(--text-secondary);">Loading keywords…</p>
+    </div>
+
+    <!-- Error -->
+    <div id="view-error" class="hidden">
+      <span class="error-icon">🔍</span>
+      <h2 class="error-title">Pre-quiz not found</h2>
+      <p class="error-msg" id="error-msg">Could not load the keyword review for this quiz.</p>
+      <a href="index.html" class="btn btn-primary">← Back to All Quizzes</a>
+    </div>
+
+    <!-- Content -->
+    <div id="view-content" class="hidden fade-in">
+
+      <!-- Hero -->
+      <div class="prequiz-hero">
+        <div class="hero-left">
+          <div class="hero-eyebrow">📖 Pre-Quiz Review</div>
+          <div class="hero-icon-title">
+            <span class="hero-icon" id="hero-icon">🌐</span>
+            <h1 class="hero-title" id="hero-title">Keywords</h1>
+          </div>
+          <p class="hero-desc" id="hero-desc"></p>
+        </div>
+        <div class="hero-right">
+          <div class="hero-stat">
+            <span class="hero-stat-value" id="stat-keywords">0</span>
+            <span class="hero-stat-label">Keywords</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value" id="stat-pokemon">0</span>
+            <span class="hero-stat-label">Pokémon 👾</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend">
+        <div class="legend-item">
+          <span class="legend-dot real"></span>
+          Real concept — study these!
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot pokemon"></span>
+          Pokémon name — just for fun 👾
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div id="keywords-grid" class="keywords-grid"></div>
+
+      <!-- CTA -->
+      <div class="cta-bar">
+        <div class="cta-text-wrap">
+          <div class="cta-title">Ready to test your knowledge?</div>
+          <div class="cta-sub">You've reviewed the key concepts. Time to put them to the test!</div>
+        </div>
+        <a id="btn-start" href="#" class="btn-start">
+          Start Quiz
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M4 9h10M10 5l4 4-4 4" stroke="white" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-copy">
+        &copy; 2026 Developer Knowledge Quiz.<br>
+        Pokémon names and characters used on this page are trademarks of
+        <a href="https://www.pokemon.com" target="_blank" rel="noopener noreferrer">The Pokémon Company</a>
+        and its affiliates. All Pokémon names, images, and related materials
+        are &copy; Nintendo / Creatures Inc. / GAME FREAK inc. and are used here
+        solely for educational and non-commercial entertainment purposes.
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/prequiz.js"></script>
+</body>
+</html>
