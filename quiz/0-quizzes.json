@@ -83,20 +83,6 @@
       "estimatedMinutes": 10,
       "tags": ["template", "template", "teamplte", "teamplte"],
       "featured": true
-    },
-    {
-      "id": "mssql-query-concepts",
-      "file": "quiz/mssql-query-concepts.json",
-      "title": "MSSQL Query Writing Concepts",
-      "subtitle": "Understanding SQL Server Query Writing",
-      "description": "Test your conceptual understanding of how query writing works in Microsoft SQL Server. Focus is on system behavior, query logic, and design, not memorizing keywords.",
-      "category": "Databases",
-      "icon": "🗄️",
-      "difficulty": "mixed",
-      "questionCount": 20,
-      "estimatedMinutes": 18,
-      "tags": ["mssql", "sql server", "query", "concepts", "database"],
-      "featured": false
     }
   ]
 }

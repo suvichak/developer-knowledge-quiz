@@ -87,23 +87,23 @@
     },
     {
       "id": 4,
-      "text": "Which protocol is primarily used for communication between web clients and servers?",
+      "text": "What is the main advantage of separating client and server responsibilities in the client-server model?",
       "options": [
-        { "id": "A", "text": "FTP" },
-        { "id": "B", "text": "SMTP" },
-        { "id": "C", "text": "HTTP / HTTPS" },
-        { "id": "D", "text": "SSH" }
+        { "id": "A", "text": "It allows independent development and scaling of each side" },
+        { "id": "B", "text": "It requires fewer network protocols" },
+        { "id": "C", "text": "It eliminates the need for authentication" },
+        { "id": "D", "text": "It guarantees zero downtime" }
       ],
-      "correctAnswer": "C",
-      "explanation": "HTTP and its secure variant HTTPS are the application-layer protocols that govern how web browsers (clients) and web servers communicate. SMTP is for email, FTP for file transfer, and SSH for secure remote access.",
+      "correctAnswer": "A",
+      "explanation": "Separating client and server allows each to be developed, deployed, and scaled independently. This modularity is a key reason for the success of the client-server model.",
       "wrongAnswerFeedback": {
-        "A": "FTP (File Transfer Protocol) is used to transfer files, not for standard web page requests.",
-        "B": "SMTP (Simple Mail Transfer Protocol) is for sending emails, not web communication.",
-        "D": "SSH (Secure Shell) provides encrypted command-line access to remote machines, not web browsing."
+        "B": "The number of protocols is not affected by the separation of concerns.",
+        "C": "Authentication is still required in most systems.",
+        "D": "Downtime can still occur due to failures on either side."
       },
       "difficulty": "easy",
-      "tags": ["client-server", "protocols"],
-      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"
+      "tags": ["client-server", "architecture"],
+      "reference": "https://en.wikipedia.org/wiki/Client%E2%80%93server_model"
     },
     {
       "id": 5,
@@ -127,43 +127,43 @@
     },
     {
       "id": 6,
-      "text": "What is the key difference between a stateful and a stateless protocol?",
+      "text": "Why is statelessness considered an advantage in web server design?",
       "options": [
-        { "id": "A", "text": "Stateful protocols use UDP; stateless protocols use TCP" },
-        { "id": "B", "text": "A stateful protocol retains context between requests; a stateless protocol treats each request independently" },
-        { "id": "C", "text": "Stateless protocols are faster because they use binary encoding" },
-        { "id": "D", "text": "Stateful protocols only work inside a single data center" }
+        { "id": "A", "text": "It allows servers to handle requests without tracking user sessions, making scaling easier" },
+        { "id": "B", "text": "It increases the security of the network layer" },
+        { "id": "C", "text": "It guarantees faster response times for all requests" },
+        { "id": "D", "text": "It eliminates the need for databases" }
       ],
-      "correctAnswer": "B",
-      "explanation": "A stateful protocol (e.g., FTP, TCP) maintains session context: the server remembers previous interactions. A stateless protocol (e.g., HTTP) treats every request as entirely independent — the server has no memory of past requests. Statelessness makes horizontal scaling much easier, which is why sessions in web apps are often stored externally (cookies, tokens, databases).",
+      "correctAnswer": "A",
+      "explanation": "Statelessness means each request contains all the information needed for processing, so servers do not need to remember previous interactions. This makes it much easier to add or remove servers to handle varying loads (horizontal scaling).",
       "wrongAnswerFeedback": {
-        "A": "Stateful vs. stateless is a design property at the application layer, not determined by TCP vs. UDP.",
-        "C": "Stateless protocols are not inherently faster because of encoding; their scalability advantage comes from not needing server-side session storage.",
-        "D": "Stateful protocols can span data centers; the distinction is about session context, not geography."
+        "B": "Statelessness is not a direct security feature.",
+        "C": "Statelessness does not guarantee faster responses, but it does improve scalability.",
+        "D": "Databases are still needed for persistent data."
       },
       "difficulty": "hard",
-      "tags": ["client-server", "architecture", "state"],
+      "tags": ["client-server", "stateless", "scaling"],
       "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview#http_is_stateless_but_not_sessionless"
     },
     {
       "id": 7,
-      "text": "In a three-tier architecture, what is the role of the middle tier (application tier)?",
+      "text": "What is a common drawback of tightly coupling client and server logic?",
       "options": [
-        { "id": "A", "text": "It stores all persistent data for the application" },
-        { "id": "B", "text": "It renders HTML pages in the user's browser" },
-        { "id": "C", "text": "It processes business logic and mediates between the presentation tier and the data tier" },
-        { "id": "D", "text": "It handles SSL termination and serves static assets" }
+        { "id": "A", "text": "It makes updates and scaling more difficult" },
+        { "id": "B", "text": "It improves modularity and maintainability" },
+        { "id": "C", "text": "It allows for more flexible network protocols" },
+        { "id": "D", "text": "It reduces the need for testing" }
       ],
-      "correctAnswer": "C",
-      "explanation": "In three-tier architecture: the presentation tier (client/browser) handles UI, the application tier (middle) runs business logic and processes requests, and the data tier (database) stores persistent data. The application tier decouples the UI from the database, which improves maintainability and scalability.",
+      "correctAnswer": "A",
+      "explanation": "When client and server logic are tightly coupled, changes to one often require changes to the other, making updates, maintenance, and scaling more difficult.",
       "wrongAnswerFeedback": {
-        "A": "Persistent data storage is the responsibility of the data tier (third tier), typically a database.",
-        "B": "Rendering HTML in the browser is the presentation tier's role.",
-        "D": "SSL termination and static asset serving are often handled by a reverse proxy or CDN, not the application tier."
+        "B": "Tight coupling reduces modularity and maintainability.",
+        "C": "Protocol flexibility is not improved by tight coupling.",
+        "D": "Testing is still required and may be more complex."
       },
       "difficulty": "hard",
-      "tags": ["client-server", "architecture"],
-      "reference": "https://en.wikipedia.org/wiki/Multitier_architecture"
+      "tags": ["client-server", "architecture", "coupling"],
+      "reference": "https://en.wikipedia.org/wiki/Client%E2%80%93server_model"
     },
     {
       "id": 8,
@@ -224,6 +224,206 @@
       "difficulty": "hard",
       "tags": ["client-server", "architecture", "proxy"],
       "reference": "https://developer.mozilla.org/en-US/docs/Glossary/Proxy_server"
+    },
+    {
+      "id": 11,
+      "text": "What is a thin client in client-server architecture?",
+      "options": [
+        { "id": "A", "text": "A client that relies on the server for most processing and logic" },
+        { "id": "B", "text": "A client that performs all processing locally" },
+        { "id": "C", "text": "A client that only stores static files" },
+        { "id": "D", "text": "A client that acts as a server for other clients" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "A thin client is designed to be lightweight, offloading most processing and logic to the server. Web browsers are a common example.",
+      "wrongAnswerFeedback": {
+        "B": "A fat (thick) client performs most processing locally.",
+        "C": "Static file storage is not the defining feature of a thin client.",
+        "D": "Clients do not act as servers in the classic client-server model."
+      },
+      "difficulty": "easy",
+      "tags": ["client-server", "thin-client"],
+      "reference": "https://en.wikipedia.org/wiki/Thin_client"
+    },
+    {
+      "id": 12,
+      "text": "How does a RESTful API embody the principles of client-server architecture?",
+      "options": [
+        { "id": "A", "text": "It separates user interface concerns from data storage and logic" },
+        { "id": "B", "text": "It requires all clients to be web browsers" },
+        { "id": "C", "text": "It eliminates the need for HTTP" },
+        { "id": "D", "text": "It forces all logic into the client" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "RESTful APIs are designed around the separation of concerns: the client handles presentation, while the server manages data and logic. This separation is a core principle of client-server architecture.",
+      "wrongAnswerFeedback": {
+        "B": "RESTful APIs can be consumed by any client, not just browsers.",
+        "C": "RESTful APIs typically use HTTP.",
+        "D": "Logic is not forced into the client; the server still handles core logic."
+      },
+      "difficulty": "easy",
+      "tags": ["client-server", "rest", "api"],
+      "reference": "https://restfulapi.net/rest-architectural-constraint-client-server/"
+    },
+    {
+      "id": 13,
+      "text": "What is the main role of an API gateway in a client-server system?",
+      "options": [
+        { "id": "A", "text": "To provide a single entry point for client requests and route them to appropriate backend services" },
+        { "id": "B", "text": "To store all application data" },
+        { "id": "C", "text": "To replace the need for load balancers" },
+        { "id": "D", "text": "To act as a DNS resolver" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "An API gateway acts as a single entry point for clients, handling routing, authentication, rate limiting, and aggregating responses from multiple backend services.",
+      "wrongAnswerFeedback": {
+        "B": "Data storage is handled by databases, not API gateways.",
+        "C": "API gateways and load balancers serve different roles.",
+        "D": "DNS resolution is not the role of an API gateway."
+      },
+      "difficulty": "hard",
+      "tags": ["client-server", "api-gateway", "microservices"],
+      "reference": "https://microservices.io/patterns/apigateway.html"
+    },
+    {
+      "id": 14,
+      "text": "Which of the following best describes a fat (thick) client?",
+      "options": [
+        { "id": "A", "text": "A client that offloads most processing to the server" },
+        { "id": "B", "text": "A client that performs significant processing locally and may work offline" },
+        { "id": "C", "text": "A client that only displays static HTML" },
+        { "id": "D", "text": "A client that acts as a proxy server" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A fat (thick) client performs much of the processing locally, sometimes even when offline. Examples include desktop applications and some mobile apps.",
+      "wrongAnswerFeedback": {
+        "A": "That describes a thin client.",
+        "C": "Static HTML display is not the defining feature of a fat client.",
+        "D": "Clients do not act as proxy servers in this context."
+      },
+      "difficulty": "easy",
+      "tags": ["client-server", "fat-client"],
+      "reference": "https://en.wikipedia.org/wiki/Fat_client"
+    },
+    {
+      "id": 15,
+      "text": "Why are APIs important in client-server architecture?",
+      "options": [
+        { "id": "A", "text": "They define clear contracts for communication between client and server" },
+        { "id": "B", "text": "They eliminate the need for servers" },
+        { "id": "C", "text": "They guarantee zero downtime" },
+        { "id": "D", "text": "They force all logic into the client" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "APIs (Application Programming Interfaces) define how clients and servers interact, specifying endpoints, data formats, and expected behaviors. This contract enables interoperability and modularity.",
+      "wrongAnswerFeedback": {
+        "B": "Servers are still required to provide resources and logic.",
+        "C": "APIs do not guarantee uptime.",
+        "D": "Logic can be on either side, depending on the API design."
+      },
+      "difficulty": "easy",
+      "tags": ["client-server", "api"],
+      "reference": "https://en.wikipedia.org/wiki/API"
+    },
+    {
+      "id": 16,
+      "text": "What is the main benefit of using a service-oriented architecture (SOA) in client-server systems?",
+      "options": [
+        { "id": "A", "text": "It enables independent deployment and scaling of services" },
+        { "id": "B", "text": "It requires all services to be written in the same language" },
+        { "id": "C", "text": "It eliminates the need for clients" },
+        { "id": "D", "text": "It guarantees no network failures" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "SOA allows different services to be developed, deployed, and scaled independently, improving flexibility and maintainability.",
+      "wrongAnswerFeedback": {
+        "B": "Services in SOA can be written in any language as long as they communicate via agreed protocols.",
+        "C": "Clients are still needed to consume services.",
+        "D": "Network failures can still occur in any architecture."
+      },
+      "difficulty": "hard",
+      "tags": ["client-server", "soa", "architecture"],
+      "reference": "https://en.wikipedia.org/wiki/Service-oriented_architecture"
+    },
+    {
+      "id": 17,
+      "text": "How does a CDN (Content Delivery Network) complement client-server architecture?",
+      "options": [
+        { "id": "A", "text": "By caching and serving content closer to clients, reducing latency" },
+        { "id": "B", "text": "By replacing the need for servers" },
+        { "id": "C", "text": "By storing only DNS records" },
+        { "id": "D", "text": "By forcing all traffic through a single server" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "A CDN caches content at edge locations near users, reducing latency and offloading traffic from origin servers.",
+      "wrongAnswerFeedback": {
+        "B": "CDNs complement, not replace, origin servers.",
+        "C": "CDNs cache and serve content, not just DNS records.",
+        "D": "CDNs distribute traffic, not centralize it."
+      },
+      "difficulty": "hard",
+      "tags": ["client-server", "cdn", "performance"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/CDN"
+    },
+    {
+      "id": 18,
+      "text": "What is the main security risk if a client blindly trusts all data from a server?",
+      "options": [
+        { "id": "A", "text": "It may be vulnerable to malicious data or code, leading to security breaches" },
+        { "id": "B", "text": "It will always run faster" },
+        { "id": "C", "text": "It will never need to validate input" },
+        { "id": "D", "text": "It guarantees data integrity" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "Clients must validate and sanitize all data received from servers to prevent attacks such as XSS, CSRF, or injection attacks.",
+      "wrongAnswerFeedback": {
+        "B": "Security is not related to speed.",
+        "C": "Input validation is always necessary.",
+        "D": "Trusting all data does not guarantee integrity."
+      },
+      "difficulty": "hard",
+      "tags": ["client-server", "security"],
+      "reference": "https://owasp.org/www-community/attacks"
+    },
+    {
+      "id": 19,
+      "text": "How does session management typically work in stateless client-server systems?",
+      "options": [
+        { "id": "A", "text": "Session state is stored on the client and passed with each request (e.g., cookies, tokens)" },
+        { "id": "B", "text": "Session state is always stored on the server only" },
+        { "id": "C", "text": "Sessions are not possible in stateless systems" },
+        { "id": "D", "text": "Session management is handled by DNS" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "In stateless systems, session data is typically stored on the client (e.g., in cookies or tokens) and sent with each request, allowing the server to remain stateless.",
+      "wrongAnswerFeedback": {
+        "B": "Storing all session state on the server makes the system stateful.",
+        "C": "Sessions are possible using client-side storage.",
+        "D": "DNS does not manage sessions."
+      },
+      "difficulty": "hard",
+      "tags": ["client-server", "sessions", "stateless"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies"
+    },
+    {
+      "id": 20,
+      "text": "What is the main reason for using microservices in modern client-server systems?",
+      "options": [
+        { "id": "A", "text": "To break down applications into smaller, independently deployable services" },
+        { "id": "B", "text": "To force all logic into the client" },
+        { "id": "C", "text": "To eliminate the need for APIs" },
+        { "id": "D", "text": "To guarantee zero downtime" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "Microservices architecture decomposes applications into small, independent services that can be developed, deployed, and scaled separately, increasing agility and resilience.",
+      "wrongAnswerFeedback": {
+        "B": "Logic can be distributed as needed.",
+        "C": "APIs are still required for communication between services.",
+        "D": "No architecture can guarantee zero downtime."
+      },
+      "difficulty": "hard",
+      "tags": ["client-server", "microservices", "architecture"],
+      "reference": "https://microservices.io/"
     }
   ]
 }
