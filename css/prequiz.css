@@ -336,6 +336,133 @@ main {
 .result-legend-item.missed  .result-legend-dot { background: var(--wrong-border); }
 .result-legend-item.wrong   .result-legend-dot { background: #d97706; }
 
+/* ─── Missed Concepts Pane ───────────────────────────────────── */
+.missed-pane {
+  background: #fffbeb;
+  border: 2px solid #d97706;
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  animation: fadeSlideIn 0.4s ease both;
+}
+
+.missed-pane.all-visited {
+  border-color: var(--correct-border);
+  background: var(--correct-bg);
+  transition: border-color 0.4s ease, background 0.4s ease;
+}
+
+.missed-pane-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.missed-pane-icon { font-size: 26px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+
+.missed-pane-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 4px;
+}
+
+.missed-pane.all-visited .missed-pane-title { color: var(--correct-text); }
+
+.missed-pane-sub {
+  font-size: 14px;
+  color: #78350f;
+  line-height: 1.55;
+}
+
+.missed-pane.all-visited .missed-pane-sub { color: var(--correct-text); opacity: 0.8; }
+
+/* ─── Missed link chips ──────────────────────────────────────── */
+.missed-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.missed-link-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #fff;
+  border: 2px solid #d97706;
+  border-radius: 999px;
+  padding: 8px 18px 8px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #92400e;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s, box-shadow 0.18s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.missed-link-chip:hover {
+  background: #d97706;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(217,119,6,0.35);
+}
+
+.missed-link-chip.visited {
+  border-color: var(--correct-border);
+  background: var(--correct-bg);
+  color: var(--correct-text);
+}
+
+.missed-link-chip .missed-link-check { font-size: 12px; }
+.missed-link-chip .missed-link-icon  { font-size: 13px; }
+
+/* ─── Missed progress bar ────────────────────────────────────── */
+.missed-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.missed-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.missed-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #d97706, var(--correct-border));
+  border-radius: 99px;
+  transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+  width: 0%;
+}
+
+.missed-pane.all-visited .missed-progress-fill { background: var(--correct-border); }
+
+.missed-progress-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #7a5c00;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.missed-pane.all-visited .missed-progress-label { color: var(--correct-text); }
+
+/* ─── Start button locked state ──────────────────────────────── */
+.btn-start.btn-start-locked {
+  background: var(--text-tertiary);
+  cursor: not-allowed;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.btn-start.btn-start-locked:hover { background: var(--text-tertiary); }
+
 /* ─── CTA Bar ────────────────────────────────────────────────── */
 .cta-bar {
   background: var(--surface);

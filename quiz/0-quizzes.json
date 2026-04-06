@@ -1,6 +1,20 @@
 {
   "quizzes": [
     {
+      "id": "https",
+      "file": "quiz/https.json",
+      "title": "How HTTPS Works",
+      "subtitle": "Secure web communication from basics to TLS internals",
+      "description": "Test your understanding of HTTPS, TLS/SSL, certificates, handshakes, and secure communication on the web.",
+      "category": "Web Security",
+      "icon": "🔒",
+      "difficulty": "mixed",
+      "questionCount": 20,
+      "estimatedMinutes": 15,
+      "tags": ["https", "tls", "ssl", "security", "certificates"],
+      "featured": true
+    },
+    {
       "id": "template",
       "file": "quiz/0-template.json",
       "title": "Quiz template",

@@ -103,15 +103,35 @@
         </div>
       </div>
 
+      <!-- Missed concepts pane (shown only when result-wrong cards exist) -->
+      <div id="missed-pane" class="missed-pane hidden">
+        <div class="missed-pane-header">
+          <span class="missed-pane-icon">📚</span>
+          <div>
+            <div class="missed-pane-title">Let's learn these before the quiz</div>
+            <div class="missed-pane-sub">You marked the terms below as Pokémon, but they're real developer concepts. Click each one to look it up — the Start Quiz button unlocks once you've visited them all.</div>
+          </div>
+        </div>
+        <div id="missed-links" class="missed-links"></div>
+        <div class="missed-progress">
+          <div class="missed-progress-bar"><div id="missed-progress-fill" class="missed-progress-fill"></div></div>
+          <span id="missed-progress-label" class="missed-progress-label">0 / 0 visited</span>
+        </div>
+      </div>
+
       <!-- CTA -->
       <div id="cta-bar" class="cta-bar hidden">
         <div class="cta-text-wrap">
-          <div class="cta-title">Ready to take the quiz?</div>
-          <div class="cta-sub">You know your Pokémon from your dev terms — now test your knowledge!</div>
+          <div id="cta-title" class="cta-title">Ready to take the quiz?</div>
+          <div id="cta-sub" class="cta-sub">You know your Pokémon from your dev terms — now test your knowledge!</div>
         </div>
-        <a id="btn-start" href="#" class="btn-start">
-          Start Quiz
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <a id="btn-start" href="#" class="btn-start btn-start-locked" aria-disabled="true">
+          <span id="btn-start-label">Visit all missed keywords first</span>
+          <svg id="btn-start-icon-lock" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="4" y="8" width="10" height="8" rx="2" stroke="white" stroke-width="1.8"/>
+            <path d="M6 8V6a3 3 0 0 1 6 0v2" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <svg id="btn-start-icon-go" class="hidden" width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path d="M4 9h10M10 5l4 4-4 4" stroke="white" stroke-width="1.8"
                   stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
