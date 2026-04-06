@@ -140,6 +140,7 @@
           <input type="text" id="token-name-input" class="token-name-input"
                  placeholder="Your full name" maxlength="100" autocomplete="name"
                  onkeydown="if(event.key==='Enter')engine.requestToken()" />
+          <span class="token-gen-pointer" aria-hidden="true">👉</span>
           <button class="btn btn-primary" id="btn-gen-token" onclick="engine.requestToken()">
             Generate Token
           </button>

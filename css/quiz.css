@@ -537,6 +537,19 @@ footer { padding: 20px 24px; }
   align-items: center;
 }
 
+.token-gen-pointer {
+  font-size: 26px;
+  line-height: 1;
+  animation: point-nudge 0.8s ease-in-out infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@keyframes point-nudge {
+  0%,  100% { transform: translateX(0);   }
+  50%        { transform: translateX(6px); }
+}
+
 .token-name-input {
   flex: 1;
   padding: 11px 14px;
