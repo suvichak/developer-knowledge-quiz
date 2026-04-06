@@ -1,0 +1,229 @@
+{
+  "meta": {
+    "id": "http",
+    "version": "1.0",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07",
+    "author": "Developer Knowledge Quiz",
+    "language": "en"
+  },
+  "quiz": {
+    "title": "How HTTP Works",
+    "subtitle": "From request methods to status codes and headers",
+    "description": "Test your understanding of the HyperText Transfer Protocol — the foundation of data communication on the web.",
+    "category": "Web Fundamentals",
+    "tags": ["http", "web", "requests", "status-codes", "headers"],
+    "icon": "🌐",
+    "difficulty": "mixed",
+    "estimatedMinutes": 10
+  },
+  "settings": {
+    "shuffleQuestions": false,
+    "shuffleOptions": false,
+    "passingScore": 70,
+    "showProgressBar": true,
+    "allowRetake": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "text": "What does HTTP stand for?",
+      "options": [
+        { "id": "A", "text": "HyperText Transfer Protocol" },
+        { "id": "B", "text": "High Traffic Transfer Protocol" },
+        { "id": "C", "text": "HyperText Transport Program" },
+        { "id": "D", "text": "Host Text Transfer Protocol" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "HTTP stands for HyperText Transfer Protocol. It is the foundation of data communication on the Web, defining how messages are formatted and transmitted.",
+      "wrongAnswerFeedback": {
+        "B": "There is no 'High Traffic' variant; HTTP is named for HyperText, not traffic patterns.",
+        "C": "It is a Protocol, not a Program, and Transfer is the correct word.",
+        "D": "The H stands for HyperText, referring to the type of content originally designed for — HTML pages."
+      },
+      "difficulty": "easy",
+      "tags": ["http", "basics"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"
+    },
+    {
+      "id": 2,
+      "text": "What is the default port number for HTTP?",
+      "options": [
+        { "id": "A", "text": "443" },
+        { "id": "B", "text": "8080" },
+        { "id": "C", "text": "80" },
+        { "id": "D", "text": "21" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "HTTP uses port 80 by default. Port 443 is used by HTTPS, port 8080 is a common alternative for development, and port 21 is used by FTP.",
+      "wrongAnswerFeedback": {
+        "A": "Port 443 is the default port for HTTPS (encrypted HTTP), not plain HTTP.",
+        "B": "Port 8080 is commonly used as an alternative HTTP port in development environments, not the official default.",
+        "D": "Port 21 is used by FTP (File Transfer Protocol), not HTTP."
+      },
+      "difficulty": "easy",
+      "tags": ["http", "ports"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"
+    },
+    {
+      "id": 3,
+      "text": "Which HTTP method is typically used to retrieve data from a server without modifying it?",
+      "options": [
+        { "id": "A", "text": "POST" },
+        { "id": "B", "text": "GET" },
+        { "id": "C", "text": "PUT" },
+        { "id": "D", "text": "DELETE" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "GET is used to request data from a resource. It is safe (no side effects) and idempotent (multiple identical requests have the same effect as one).",
+      "wrongAnswerFeedback": {
+        "A": "POST is used to submit data to a server, often creating a new resource — it can modify server state.",
+        "C": "PUT is used to replace an existing resource with a new version.",
+        "D": "DELETE is used to remove a resource from the server."
+      },
+      "difficulty": "easy",
+      "tags": ["http", "methods"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET"
+    },
+    {
+      "id": 4,
+      "text": "What does an HTTP 404 status code mean?",
+      "options": [
+        { "id": "A", "text": "The server encountered an internal error" },
+        { "id": "B", "text": "The request was successful" },
+        { "id": "C", "text": "The client is not authorized" },
+        { "id": "D", "text": "The requested resource was not found" }
+      ],
+      "correctAnswer": "D",
+      "explanation": "404 Not Found means the server could not locate the requested resource. It is a client-side error, indicating the URL is wrong or the resource no longer exists.",
+      "wrongAnswerFeedback": {
+        "A": "An internal server error is indicated by 500, not 404.",
+        "B": "A successful request returns 200 OK.",
+        "C": "Lack of authorization is 401 (Unauthorized) or 403 (Forbidden), not 404."
+      },
+      "difficulty": "easy",
+      "tags": ["http", "status-codes"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"
+    },
+    {
+      "id": 5,
+      "text": "What does an HTTP 200 status code indicate?",
+      "options": [
+        { "id": "A", "text": "The resource has been permanently moved" },
+        { "id": "B", "text": "The request succeeded" },
+        { "id": "C", "text": "The server is temporarily unavailable" },
+        { "id": "D", "text": "The request is still being processed" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "200 OK is the standard success response. It means the request was received, understood, and the server is returning the requested resource.",
+      "wrongAnswerFeedback": {
+        "A": "Permanent redirect is 301 Moved Permanently.",
+        "C": "Service unavailability is 503 Service Unavailable.",
+        "D": "A request still being processed returns 102 Processing or 202 Accepted, not 200."
+      },
+      "difficulty": "easy",
+      "tags": ["http", "status-codes"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200"
+    },
+    {
+      "id": 6,
+      "text": "What is the key difference between HTTP/1.1 persistent connections and HTTP/2 multiplexing?",
+      "options": [
+        { "id": "A", "text": "HTTP/1.1 keeps one connection open for multiple sequential requests; HTTP/2 sends multiple requests concurrently over a single connection" },
+        { "id": "B", "text": "HTTP/1.1 uses UDP; HTTP/2 uses TCP" },
+        { "id": "C", "text": "HTTP/2 requires a new TCP connection for each request; HTTP/1.1 reuses one connection" },
+        { "id": "D", "text": "HTTP/1.1 multiplexes streams; HTTP/2 uses separate connections per resource" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "HTTP/1.1 introduced persistent connections (keep-alive) so multiple requests can reuse one TCP connection — but they are still sequential (head-of-line blocking). HTTP/2 multiplexing allows many requests and responses to be interleaved concurrently over a single connection, eliminating head-of-line blocking at the HTTP layer.",
+      "wrongAnswerFeedback": {
+        "B": "Both HTTP/1.1 and HTTP/2 run over TCP, not UDP.",
+        "C": "This is backwards — HTTP/2 was designed to reduce connection overhead, not increase it.",
+        "D": "This reverses the two protocols — multiplexing is the HTTP/2 feature."
+      },
+      "difficulty": "hard",
+      "tags": ["http", "http2", "performance"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Connection_management_in_HTTP_1.x"
+    },
+    {
+      "id": 7,
+      "text": "What is the primary purpose of the HTTP OPTIONS method?",
+      "options": [
+        { "id": "A", "text": "To delete all resources under a path" },
+        { "id": "B", "text": "To describe the communication options (allowed methods) for a target resource" },
+        { "id": "C", "text": "To update a resource's metadata without changing its body" },
+        { "id": "D", "text": "To retrieve only the response headers without the body" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "The OPTIONS method asks the server which HTTP methods and headers are supported for a given URL. It is widely used in CORS preflight requests, where the browser asks the server if a cross-origin request is permitted before sending the actual request.",
+      "wrongAnswerFeedback": {
+        "A": "Deleting resources is the role of DELETE, not OPTIONS.",
+        "C": "Updating metadata is done with PATCH or PUT.",
+        "D": "Retrieving only headers is the purpose of the HEAD method, not OPTIONS."
+      },
+      "difficulty": "hard",
+      "tags": ["http", "methods", "cors"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS"
+    },
+    {
+      "id": 8,
+      "text": "What is the difference between the HTTP PUT and PATCH methods?",
+      "options": [
+        { "id": "A", "text": "PUT is idempotent and replaces the entire resource; PATCH applies a partial update" },
+        { "id": "B", "text": "PUT appends data to a resource; PATCH replaces the entire resource" },
+        { "id": "C", "text": "There is no difference — they are interchangeable aliases" },
+        { "id": "D", "text": "PUT is used for binary files; PATCH is used for text files" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "PUT replaces the complete target resource with the request payload, making it idempotent. PATCH applies a partial modification — only the specified fields are changed. PATCH may or may not be idempotent depending on implementation.",
+      "wrongAnswerFeedback": {
+        "B": "This is reversed — PUT replaces the full resource; PATCH applies partial changes.",
+        "C": "They have distinct semantics defined in the HTTP specification (RFC 7231 and RFC 5789).",
+        "D": "Both methods are content-agnostic; the distinction is about full vs. partial replacement, not file type."
+      },
+      "difficulty": "hard",
+      "tags": ["http", "methods"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH"
+    },
+    {
+      "id": 9,
+      "text": "What does the HTTP header `Cache-Control: no-store` instruct?",
+      "options": [
+        { "id": "A", "text": "The response can be cached but must be revalidated before use" },
+        { "id": "B", "text": "The response must not be stored in any cache" },
+        { "id": "C", "text": "The cache entry expires after one second" },
+        { "id": "D", "text": "The response is only cacheable by the browser, not by proxy servers" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "`Cache-Control: no-store` tells every cache (browser, proxy, CDN) that it must not store any part of the response. This is the strongest directive for preventing caching, used for highly sensitive data like banking transactions.",
+      "wrongAnswerFeedback": {
+        "A": "Revalidation behavior is controlled by `no-cache` (must revalidate before use) or `must-revalidate`, not `no-store`.",
+        "C": "`no-store` has nothing to do with time-based expiry; use `max-age=0` for that.",
+        "D": "Restricting caching to the browser only is done with `private`, not `no-store`."
+      },
+      "difficulty": "hard",
+      "tags": ["http", "headers", "caching"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control"
+    },
+    {
+      "id": 10,
+      "text": "What does the `Transfer-Encoding: chunked` header indicate in an HTTP response?",
+      "options": [
+        { "id": "A", "text": "The response body is compressed using gzip" },
+        { "id": "B", "text": "The server will send the response in multiple TCP packets" },
+        { "id": "C", "text": "The response body is sent in a series of chunks, allowing streaming before the full size is known" },
+        { "id": "D", "text": "The client must split the request into several smaller requests" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "Chunked transfer encoding allows the server to begin sending a response before it knows the total content length. The body is broken into chunks, each preceded by its size in hex. This is useful for streaming large responses or dynamically generated content.",
+      "wrongAnswerFeedback": {
+        "A": "Compression is indicated by `Content-Encoding: gzip`, not `Transfer-Encoding: chunked`.",
+        "B": "All TCP responses involve multiple packets; chunked encoding is an HTTP-layer framing mechanism, not a TCP concept.",
+        "D": "Chunked transfer encoding applies to the server response, not the client request."
+      },
+      "difficulty": "hard",
+      "tags": ["http", "headers", "streaming"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Transfer-Encoding"
+    }
+  ]
+}

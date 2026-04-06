@@ -1,0 +1,235 @@
+{
+  "meta": {
+    "id": "logging-debugging",
+    "version": "1.0",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07",
+    "author": "Developer Knowledge Quiz",
+    "language": "en"
+  },
+  "quiz": {
+    "title": "How Logs Are Used to Trace a Bug",
+    "subtitle": "From log levels to stack traces",
+    "description": "Test your understanding of how application logs work, what information they contain, and how developers use them to track down and diagnose bugs.",
+    "category": "Debugging",
+    "tags": [
+      "logging",
+      "debugging",
+      "tracing",
+      "observability",
+      "error handling"
+    ],
+    "icon": "🪲",
+    "difficulty": "mixed",
+    "estimatedMinutes": 10
+  },
+  "settings": {
+    "shuffleQuestions": false,
+    "shuffleOptions": false,
+    "passingScore": 70,
+    "showProgressBar": true,
+    "allowRetake": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "text": "Which log level typically indicates a serious failure that requires immediate attention?",
+      "options": [
+        { "id": "A", "text": "DEBUG" },
+        { "id": "B", "text": "INFO" },
+        { "id": "C", "text": "ERROR" },
+        { "id": "D", "text": "TRACE" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "ERROR (or FATAL/CRITICAL in some frameworks) indicates a serious problem. DEBUG and TRACE are low-level diagnostic levels, while INFO records normal operational events.",
+      "wrongAnswerFeedback": {
+        "A": "DEBUG is the most verbose level, used for detailed diagnostic output during development — not for critical failures.",
+        "B": "INFO messages record normal operational events such as service start-up or a completed request.",
+        "D": "TRACE is even more granular than DEBUG, typically used to log every step through the code path."
+      },
+      "difficulty": "easy",
+      "tags": ["log levels", "logging basics"],
+      "reference": "https://www.slf4j.org/api/org/slf4j/event/Level.html"
+    },
+    {
+      "id": 2,
+      "text": "What is a stack trace?",
+      "options": [
+        { "id": "A", "text": "A summary of how much memory the application is using" },
+        { "id": "B", "text": "A list of active network connections at the time of an error" },
+        { "id": "C", "text": "An ordered list of method/function calls that were executing when an error occurred" },
+        { "id": "D", "text": "A log of every SQL query the application executed" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "A stack trace shows the chain of function calls (the call stack) that led to an exception or crash, letting you pinpoint exactly where in the code the error originated.",
+      "wrongAnswerFeedback": {
+        "A": "Memory usage is reported by profilers or heap dumps, not a stack trace.",
+        "B": "Network connections are captured by tools like netstat or Wireshark, not a stack trace.",
+        "D": "SQL query logs are a separate concern captured by database slow-query logs or ORM loggers."
+      },
+      "difficulty": "easy",
+      "tags": ["stack trace", "exceptions"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack"
+    },
+    {
+      "id": 3,
+      "text": "When reading a log file to find a bug, what is the most common first step?",
+      "options": [
+        { "id": "A", "text": "Search for the word 'ERROR' or 'EXCEPTION'" },
+        { "id": "B", "text": "Delete all DEBUG lines to reduce noise" },
+        { "id": "C", "text": "Restart the application and generate new logs" },
+        { "id": "D", "text": "Count how many log lines were written" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "Searching for ERROR, EXCEPTION, or FATAL keywords quickly narrows the relevant section of the log where the failure occurred, giving you a starting point for investigation.",
+      "wrongAnswerFeedback": {
+        "B": "Deleting lines destroys potentially useful context; use a filter/grep instead.",
+        "C": "Restarting before reading the log may overwrite or lose the original failure context.",
+        "D": "Line count provides no meaningful diagnostic information."
+      },
+      "difficulty": "easy",
+      "tags": ["log analysis", "debugging workflow"],
+      "reference": "https://www.loggly.com/use-cases/how-to-read-log-files/"
+    },
+    {
+      "id": 4,
+      "text": "What piece of information in a log entry helps you understand the sequence of events that led to a bug?",
+      "options": [
+        { "id": "A", "text": "The log file name" },
+        { "id": "B", "text": "The timestamp" },
+        { "id": "C", "text": "The application version" },
+        { "id": "D", "text": "The server hostname" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Timestamps let you reconstruct the chronological order of events, showing what happened before the error, how long operations took, and whether two events were related.",
+      "wrongAnswerFeedback": {
+        "A": "The log file name identifies the source component but not the order of events.",
+        "C": "Application version is useful for reproducing bugs but does not order events within a single run.",
+        "D": "Hostname is helpful in distributed systems but does not by itself order events."
+      },
+      "difficulty": "easy",
+      "tags": ["timestamps", "log analysis"],
+      "reference": "https://www.splunk.com/en_us/blog/tips-and-tricks/timestamp-best-practices-for-logging.html"
+    },
+    {
+      "id": 5,
+      "text": "Which command-line tool is commonly used to search for a specific error message inside a log file?",
+      "options": [
+        { "id": "A", "text": "ls" },
+        { "id": "B", "text": "grep" },
+        { "id": "C", "text": "chmod" },
+        { "id": "D", "text": "ping" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "`grep` (Global Regular Expression Print) scans files line-by-line and prints lines matching a given pattern, making it the standard tool for finding specific error messages in log files.",
+      "wrongAnswerFeedback": {
+        "A": "`ls` lists directory contents — it does not search file contents.",
+        "C": "`chmod` changes file permissions and has nothing to do with searching log content.",
+        "D": "`ping` tests network connectivity and is unrelated to log file searching."
+      },
+      "difficulty": "easy",
+      "tags": ["grep", "command line", "log analysis"],
+      "reference": "https://man7.org/linux/man-pages/man1/grep.1.html"
+    },
+    {
+      "id": 6,
+      "text": "In a distributed system, developers often add a unique identifier to every log line belonging to a single user request. What is this identifier commonly called?",
+      "options": [
+        { "id": "A", "text": "Session ID" },
+        { "id": "B", "text": "Thread ID" },
+        { "id": "C", "text": "Correlation ID (Trace ID)" },
+        { "id": "D", "text": "Process ID" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "A Correlation ID (also called a Trace ID or Request ID) is generated at the entry point of a request and propagated through every service call. It lets you filter logs across multiple services to reconstruct the complete journey of that single request.",
+      "wrongAnswerFeedback": {
+        "A": "A Session ID identifies a user's authenticated session — multiple requests can share one session, so it doesn't uniquely identify one request flow.",
+        "B": "Thread IDs identify OS threads but can be reused across requests and don't follow a request across service boundaries.",
+        "D": "Process IDs identify running processes, not individual requests."
+      },
+      "difficulty": "intermediate",
+      "tags": ["distributed tracing", "correlation id", "observability"],
+      "reference": "https://microservices.io/patterns/observability/distributed-tracing.html"
+    },
+    {
+      "id": 7,
+      "text": "When a log line reads `NullPointerException at UserService.java:42`, what is line 42 most likely telling you?",
+      "options": [
+        { "id": "A", "text": "The application ran for 42 seconds before crashing" },
+        { "id": "B", "text": "The exact source code line where a null reference was dereferenced" },
+        { "id": "C", "text": "There are 42 active users when the error occurred" },
+        { "id": "D", "text": "The error occurred on the 42nd request since startup" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Stack trace entries include the source file name and line number. Line 42 in UserService.java is where the code attempted to access a method or field on a null object, allowing you to open that exact line and inspect the variable that was null.",
+      "wrongAnswerFeedback": {
+        "A": "Elapsed time would appear in the timestamp, not in the class/line reference.",
+        "C": "Concurrent user count is a metric, not something encoded in a stack trace line.",
+        "D": "Request count is typically tracked separately (e.g., in metrics), not in the trace."
+      },
+      "difficulty": "intermediate",
+      "tags": ["stack trace", "NullPointerException", "debugging"],
+      "reference": "https://docs.oracle.com/javase/tutorial/essential/exceptions/stacktrace.html"
+    },
+    {
+      "id": 8,
+      "text": "What is the primary risk of logging sensitive data such as passwords or credit-card numbers inside error messages?",
+      "options": [
+        { "id": "A", "text": "It makes log files too large to read" },
+        { "id": "B", "text": "It can expose private data to anyone with access to the log storage system" },
+        { "id": "C", "text": "It causes the application to run slower" },
+        { "id": "D", "text": "It prevents the stack trace from being recorded" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Log files are frequently stored, rotated, forwarded to log aggregators, and accessed by operations teams. Embedding sensitive data means that data is persisted in plain text and visible to every system and person that handles those logs — a serious security and compliance violation (e.g., PCI-DSS, GDPR).",
+      "wrongAnswerFeedback": {
+        "A": "File size is a secondary concern compared to data exposure.",
+        "C": "Logging overhead is minimal; it does not meaningfully slow the application.",
+        "D": "Stack traces are independent of what fields are included in the log message."
+      },
+      "difficulty": "intermediate",
+      "tags": ["security", "sensitive data", "logging best practices"],
+      "reference": "https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure"
+    },
+    {
+      "id": 9,
+      "text": "You have two services, Service A and Service B. Service A calls Service B, and Service B returns a 500 error. Service A's log shows the error, but contains no details. Where should you look next?",
+      "options": [
+        { "id": "A", "text": "The database slow-query log" },
+        { "id": "B", "text": "The browser developer console" },
+        { "id": "C", "text": "Service B's own logs around the same timestamp" },
+        { "id": "D", "text": "The load balancer access log for Service A" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "A 500 Internal Server Error means the root cause happened inside Service B. Service B's logs will contain the actual exception, stack trace, and context. You correlate by matching timestamps (or a Correlation ID if one was propagated).",
+      "wrongAnswerFeedback": {
+        "A": "Database logs are relevant if Service B itself logged a DB error, but they're the third step — first inspect Service B's application logs.",
+        "B": "The browser console only shows frontend errors and network responses; internal server errors need server-side investigation.",
+        "D": "Load balancer logs record request/response codes but generally do not contain the internal error details from Service B."
+      },
+      "difficulty": "intermediate",
+      "tags": ["distributed systems", "debugging workflow", "service logs"],
+      "reference": "https://microservices.io/patterns/observability/application-logging.html"
+    },
+    {
+      "id": 10,
+      "text": "Structured logging (e.g., outputting logs as JSON) offers an advantage over plain-text logging primarily because:",
+      "options": [
+        { "id": "A", "text": "JSON log files are smaller than plain-text files" },
+        { "id": "B", "text": "Log fields can be indexed and queried precisely by tools like Elasticsearch or Splunk" },
+        { "id": "C", "text": "Structured logs are encrypted automatically" },
+        { "id": "D", "text": "Developers cannot accidentally delete structured log files" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Structured logs emit each log entry as a machine-readable document with discrete, typed fields (e.g., `{\"level\":\"ERROR\",\"traceId\":\"abc123\",\"userId\":42}`). Log aggregation platforms can ingest these, index specific fields, and allow precise queries like `level:ERROR AND userId:42` — something that requires fragile regex on plain text.",
+      "wrongAnswerFeedback": {
+        "A": "JSON adds key names and quotes, making individual entries slightly larger than equivalent plain text.",
+        "C": "Structured logging has nothing to do with encryption; that is handled by transport security (TLS) and storage encryption.",
+        "D": "File deletion permissions are controlled by the OS, not by log format."
+      },
+      "difficulty": "intermediate",
+      "tags": ["structured logging", "observability", "log aggregation"],
+      "reference": "https://www.datadoghq.com/blog/structured-logging/"
+    }
+  ]
+}

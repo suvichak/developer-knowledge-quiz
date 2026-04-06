@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "quizId": "client-server",
+    "version": "1.0",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07"
+  },
+  "prequiz": {
+    "title": "How Client-Server Works",
+    "subtitle": "Key terms before you start",
+    "description": "Review these concepts before tackling the Client-Server quiz. Understanding them will help you answer questions about network architecture, DNS, scaling, proxies, and request flows.",
+    "icon": "🖥️"
+  },
+  "keywords": [
+    {
+      "term": "Client",
+      "definition": "Any program or device that requests services or resources from a server. Common examples: web browsers, mobile apps, CLI tools making API calls.",
+      "category": "Basics"
+    },
+    {
+      "term": "Server",
+      "definition": "A program or machine that listens on a network port and provides resources or services in response to client requests. Examples: web servers (Nginx, Apache), API servers, database servers.",
+      "category": "Basics"
+    },
+    {
+      "term": "DNS (Domain Name System)",
+      "definition": "The internet's phone book. Translates human-readable domain names (e.g., example.com) into IP addresses that network hardware uses to route traffic.",
+      "category": "Networking"
+    },
+    {
+      "term": "IP Address",
+      "definition": "A numerical label assigned to each device on a network. IPv4 addresses look like 192.168.1.1; IPv6 addresses are longer. Used to route data to the correct destination.",
+      "category": "Networking"
+    },
+    {
+      "term": "Stateless Protocol",
+      "definition": "A protocol where the server does not retain any memory of previous requests. Each request contains all the information needed to process it. HTTP is stateless.",
+      "category": "Architecture"
+    },
+    {
+      "term": "Three-Tier Architecture",
+      "definition": "A pattern that separates an application into: presentation tier (client/UI), application tier (business logic), and data tier (database). Each tier has a distinct responsibility.",
+      "category": "Architecture"
+    },
+    {
+      "term": "Load Balancer",
+      "definition": "A device or service that distributes incoming client requests across multiple server instances using algorithms like round-robin or least connections, improving availability and throughput.",
+      "category": "Infrastructure"
+    },
+    {
+      "term": "Horizontal Scaling (Scale Out)",
+      "definition": "Adding more identical server instances to a pool to handle increased load. Preferred for stateless web applications because it offers high availability and near-unlimited capacity.",
+      "category": "Scalability"
+    },
+    {
+      "term": "Vertical Scaling (Scale Up)",
+      "definition": "Upgrading the hardware (CPU, RAM, storage) of an existing server. Simpler to implement but has a physical upper limit and creates a single point of failure.",
+      "category": "Scalability"
+    },
+    {
+      "term": "Reverse Proxy",
+      "definition": "A server that sits in front of backend servers and forwards client requests to them. Used for load balancing, SSL termination, caching, and hiding server infrastructure. Examples: Nginx, HAProxy, Cloudflare.",
+      "category": "Infrastructure"
+    }
+  ]
+}

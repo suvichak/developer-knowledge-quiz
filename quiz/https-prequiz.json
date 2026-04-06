@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "quizId": "https",
+    "version": "1.0",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07"
+  },
+  "prequiz": {
+    "title": "How HTTPS Works",
+    "subtitle": "Key terms before you start",
+    "description": "Review these concepts before tackling the HTTPS quiz. Understanding them will help you answer questions about secure web communication, TLS handshakes, and certificates.",
+    "icon": "🔒"
+  },
+  "keywords": [
+    {
+      "term": "HTTPS",
+      "definition": "HyperText Transfer Protocol Secure — HTTP with an added TLS encryption layer. Runs on port 443 by default.",
+      "category": "Protocol"
+    },
+    {
+      "term": "TLS (Transport Layer Security)",
+      "definition": "The modern cryptographic protocol that provides privacy and data integrity between two communicating applications. Replaced SSL.",
+      "category": "Protocol"
+    },
+    {
+      "term": "SSL (Secure Sockets Layer)",
+      "definition": "The predecessor to TLS. All SSL versions are now deprecated due to security flaws. The term is still loosely used but TLS is what's actually used today.",
+      "category": "Protocol"
+    },
+    {
+      "term": "TLS Handshake",
+      "definition": "The negotiation process at the start of a TLS connection where the client and server agree on a protocol version, cipher suite, and establish a shared session key.",
+      "category": "Encryption"
+    },
+    {
+      "term": "Certificate Authority (CA)",
+      "definition": "A trusted organization that issues and digitally signs TLS certificates, verifying domain or organization identity. Examples: Let's Encrypt, DigiCert.",
+      "category": "PKI"
+    },
+    {
+      "term": "TLS Certificate",
+      "definition": "A digital document that binds a public key to a domain name. Signed by a CA so that browsers can verify the server's identity.",
+      "category": "PKI"
+    },
+    {
+      "term": "Public Key / Private Key",
+      "definition": "A key pair used in asymmetric cryptography. The public key is shared openly; the private key is kept secret on the server. Data encrypted with one can only be decrypted with the other.",
+      "category": "Encryption"
+    },
+    {
+      "term": "Asymmetric Encryption",
+      "definition": "Encryption using a key pair (public + private). Used during TLS handshake for key exchange. Slower than symmetric, but enables secure communication without pre-shared keys.",
+      "category": "Encryption"
+    },
+    {
+      "term": "Symmetric Encryption",
+      "definition": "Encryption using a single shared secret key for both encryption and decryption. Used for bulk data transfer in TLS because it is much faster than asymmetric encryption.",
+      "category": "Encryption"
+    },
+    {
+      "term": "Cipher Suite",
+      "definition": "A named combination of algorithms specifying how key exchange, authentication, bulk encryption, and message authentication are performed in a TLS session (e.g., TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384).",
+      "category": "Encryption"
+    },
+    {
+      "term": "Chain of Trust",
+      "definition": "A hierarchy of certificates linking the server's certificate through one or more intermediate CAs back to a trusted root CA stored in the browser/OS.",
+      "category": "PKI"
+    },
+    {
+      "term": "Root CA",
+      "definition": "The top-level Certificate Authority whose certificate is self-signed and pre-installed in browsers and operating systems as a trust anchor.",
+      "category": "PKI"
+    },
+    {
+      "term": "Perfect Forward Secrecy (PFS)",
+      "definition": "A key-exchange property (achieved with ECDHE or DHE) ensuring that if a server's private key is later compromised, past recorded sessions cannot be decrypted.",
+      "category": "Security"
+    },
+    {
+      "term": "HSTS (HTTP Strict Transport Security)",
+      "definition": "A browser security policy sent via the `Strict-Transport-Security` HTTP header, instructing the browser to always use HTTPS for the domain and reject plain HTTP connections.",
+      "category": "Security"
+    },
+    {
+      "term": "SNI (Server Name Indication)",
+      "definition": "A TLS extension where the client sends the target hostname at the start of the handshake, allowing a single server IP to serve multiple TLS certificates (virtual hosting).",
+      "category": "TLS"
+    },
+    {
+      "term": "OCSP (Online Certificate Status Protocol)",
+      "definition": "A protocol for real-time certificate revocation checking. The browser queries the CA to see if a certificate has been revoked before trusting it.",
+      "category": "PKI"
+    },
+    {
+      "term": "CRL (Certificate Revocation List)",
+      "definition": "A periodically published list of certificates revoked by a CA before their expiry date. Browsers can download it to check certificate validity.",
+      "category": "PKI"
+    },
+    {
+      "term": "Man-in-the-Middle (MitM) Attack",
+      "definition": "An attack where a third party intercepts communication between client and server. HTTPS certificate validation prevents MitM by ensuring the server's identity is verified.",
+      "category": "Security"
+    },
+    {
+      "term": "Domain Validation (DV) Certificate",
+      "definition": "The most basic TLS certificate type, confirming only that the applicant controls the domain. Issued automatically (e.g., by Let's Encrypt) without verifying organization identity.",
+      "category": "PKI"
+    },
+    {
+      "term": "TLS 1.3",
+      "definition": "The latest TLS version (2018). Removed weak algorithms, reduced handshake to 1-RTT, and added 0-RTT resumption for faster reconnections while maintaining security.",
+      "category": "Protocol"
+    }
+  ]
+}

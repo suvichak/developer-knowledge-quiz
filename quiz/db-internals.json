@@ -1,0 +1,629 @@
+{
+  "meta": {
+    "id": "db-internals",
+    "version": "1.0",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07",
+    "author": "Developer Knowledge Quiz",
+    "language": "en"
+  },
+  "quiz": {
+    "title": "How Databases Really Read and Write Data",
+    "subtitle": "Under the hood — storage, transactions, and concurrency",
+    "description": "Test your understanding of how databases physically read and write data, covering ACID properties, transactions, indexing, connection pooling, WAL, MVCC, buffer pools, and more.",
+    "category": "Databases",
+    "tags": ["database", "acid", "transactions", "indexes", "connection-pool", "mvcc", "wal", "internals"],
+    "icon": "🗄️",
+    "difficulty": "mixed",
+    "estimatedMinutes": 25
+  },
+  "settings": {
+    "shuffleQuestions": false,
+    "shuffleOptions": false,
+    "passingScore": 70,
+    "showProgressBar": true,
+    "allowRetake": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "text": "What does the acronym ACID stand for in database systems?",
+      "options": [
+        { "id": "A", "text": "Atomicity, Consistency, Isolation, Durability" },
+        { "id": "B", "text": "Accuracy, Concurrency, Integrity, Distribution" },
+        { "id": "C", "text": "Atomicity, Consistency, Integrity, Distribution" },
+        { "id": "D", "text": "Accuracy, Consistency, Isolation, Durability" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "ACID stands for Atomicity, Consistency, Isolation, and Durability. These four properties guarantee that database transactions are processed reliably even in the event of errors, power failures, or other problems.",
+      "wrongAnswerFeedback": {
+        "B": "None of those replacements are correct. The real properties are Atomicity, Consistency, Isolation, and Durability.",
+        "C": "The 'I' is Isolation, not Integrity, and the 'D' is Durability, not Distribution.",
+        "D": "The 'A' is Atomicity, not Accuracy. Precision of data is important, but Atomicity (all-or-nothing) is the actual ACID property."
+      },
+      "difficulty": "easy",
+      "tags": ["acid", "fundamentals"],
+      "reference": "https://en.wikipedia.org/wiki/ACID"
+    },
+    {
+      "id": 2,
+      "text": "Which ACID property guarantees that a transaction is treated as a single unit — either all operations succeed or none are applied?",
+      "options": [
+        { "id": "A", "text": "Consistency" },
+        { "id": "B", "text": "Isolation" },
+        { "id": "C", "text": "Atomicity" },
+        { "id": "D", "text": "Durability" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "Atomicity ensures that a transaction is all-or-nothing. If any step within a transaction fails, the entire transaction is rolled back, leaving the database unchanged.",
+      "wrongAnswerFeedback": {
+        "A": "Consistency means the database moves from one valid state to another, but it doesn't describe the all-or-nothing guarantee.",
+        "B": "Isolation controls how concurrent transactions are visible to each other, not whether operations are atomic.",
+        "D": "Durability ensures committed data survives crashes, but it doesn't describe whether a partial transaction can be applied."
+      },
+      "difficulty": "easy",
+      "tags": ["acid", "atomicity"],
+      "reference": "https://en.wikipedia.org/wiki/Atomicity_(database_systems)"
+    },
+    {
+      "id": 3,
+      "text": "Which ACID property ensures that once a transaction is committed, the data persists even if the system crashes immediately afterward?",
+      "options": [
+        { "id": "A", "text": "Atomicity" },
+        { "id": "B", "text": "Consistency" },
+        { "id": "C", "text": "Isolation" },
+        { "id": "D", "text": "Durability" }
+      ],
+      "correctAnswer": "D",
+      "explanation": "Durability guarantees that committed transactions are permanently saved. Databases typically achieve this through mechanisms like write-ahead logging (WAL), which persists changes to disk before acknowledging the commit.",
+      "wrongAnswerFeedback": {
+        "A": "Atomicity is about all-or-nothing execution, not crash recovery after a commit.",
+        "B": "Consistency ensures valid state transitions according to rules, not crash-safe persistence.",
+        "C": "Isolation controls how concurrent transactions interact, not what happens to committed data after a crash."
+      },
+      "difficulty": "easy",
+      "tags": ["acid", "durability"],
+      "reference": "https://en.wikipedia.org/wiki/Durability_(database_systems)"
+    },
+    {
+      "id": 4,
+      "text": "Which ACID property ensures that concurrent transactions execute as if they were run serially, preventing them from interfering with each other?",
+      "options": [
+        { "id": "A", "text": "Atomicity" },
+        { "id": "B", "text": "Isolation" },
+        { "id": "C", "text": "Durability" },
+        { "id": "D", "text": "Consistency" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Isolation ensures that the intermediate state of a transaction is not visible to other transactions. Different isolation levels (Read Uncommitted, Read Committed, Repeatable Read, Serializable) offer trade-offs between performance and strict isolation guarantees.",
+      "wrongAnswerFeedback": {
+        "A": "Atomicity ensures all-or-nothing execution within a single transaction, not concurrency control between transactions.",
+        "C": "Durability is about persisting committed data through crashes, not concurrent access control.",
+        "D": "Consistency ensures the database remains in a valid state, but the property governing concurrent interference is Isolation."
+      },
+      "difficulty": "medium",
+      "tags": ["acid", "isolation"],
+      "reference": "https://en.wikipedia.org/wiki/Isolation_(database_systems)"
+    },
+    {
+      "id": 5,
+      "text": "Which ACID property guarantees that a transaction brings the database from one valid state to another, never leaving it in a partially broken state that violates defined rules?",
+      "options": [
+        { "id": "A", "text": "Consistency" },
+        { "id": "B", "text": "Atomicity" },
+        { "id": "C", "text": "Isolation" },
+        { "id": "D", "text": "Durability" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "Consistency means any transaction takes the database from one valid state to another, respecting all defined constraints, triggers, and rules. It is partly enforced by the database engine and partly by the application logic.",
+      "wrongAnswerFeedback": {
+        "B": "Atomicity is about all-or-nothing; it prevents partial updates but doesn't directly enforce data validity rules.",
+        "C": "Isolation controls visibility between concurrent transactions, not whether final states are valid.",
+        "D": "Durability focuses on persistence after commit, not on enforcing data integrity rules."
+      },
+      "difficulty": "medium",
+      "tags": ["acid", "consistency"],
+      "reference": "https://en.wikipedia.org/wiki/Consistency_(database_systems)"
+    },
+    {
+      "id": 6,
+      "text": "What SQL statement is used to permanently save all changes made within a transaction?",
+      "options": [
+        { "id": "A", "text": "SAVE" },
+        { "id": "B", "text": "FLUSH" },
+        { "id": "C", "text": "COMMIT" },
+        { "id": "D", "text": "APPLY" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "COMMIT permanently writes all changes made during the current transaction to the database. After a COMMIT, the changes become visible to other transactions and are durable.",
+      "wrongAnswerFeedback": {
+        "A": "SAVE is not a standard SQL transaction command. You may be thinking of SAVEPOINT, which creates a point within a transaction to roll back to.",
+        "B": "FLUSH is not a standard SQL transaction command. It may exist in specific DBMS contexts (e.g., MySQL FLUSH TABLES) but is not used to commit transactions.",
+        "D": "APPLY is not a SQL transaction command. The correct command to persist changes is COMMIT."
+      },
+      "difficulty": "easy",
+      "tags": ["transactions", "sql"],
+      "reference": "https://en.wikipedia.org/wiki/Commit_(data_management)"
+    },
+    {
+      "id": 7,
+      "text": "What SQL command is used to undo all changes made in the current transaction and restore the previous state?",
+      "options": [
+        { "id": "A", "text": "UNDO" },
+        { "id": "B", "text": "ROLLBACK" },
+        { "id": "C", "text": "REVERT" },
+        { "id": "D", "text": "CANCEL" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "ROLLBACK reverts all changes made during the current transaction, restoring the database to the state it was in before the transaction began. It is also triggered automatically when an error occurs in a transaction block.",
+      "wrongAnswerFeedback": {
+        "A": "UNDO is not a standard SQL command for transactions, though it describes the concept. The actual SQL keyword is ROLLBACK.",
+        "C": "REVERT is not a SQL transaction command. ROLLBACK is the correct keyword.",
+        "D": "CANCEL is not a SQL command. Use ROLLBACK to discard uncommitted changes."
+      },
+      "difficulty": "easy",
+      "tags": ["transactions", "sql"],
+      "reference": "https://en.wikipedia.org/wiki/Rollback_(data_management)"
+    },
+    {
+      "id": 8,
+      "text": "What is a SAVEPOINT in a database transaction?",
+      "options": [
+        { "id": "A", "text": "A backup of the entire database taken before a transaction starts" },
+        { "id": "B", "text": "A named marker within a transaction that allows partial rollback to that point" },
+        { "id": "C", "text": "A commit that is saved to a temporary log before being finalized" },
+        { "id": "D", "text": "A snapshot of the transaction log stored on disk" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A SAVEPOINT creates a named marker inside a transaction. You can later issue ROLLBACK TO SAVEPOINT to undo changes only back to that point, without rolling back the entire transaction. This is useful for complex operations that may partially fail.",
+      "wrongAnswerFeedback": {
+        "A": "A SAVEPOINT is not a full database backup; it is a lightweight marker inside an active transaction.",
+        "C": "A SAVEPOINT does not finalize or commit anything. It is purely a rollback target within the transaction.",
+        "D": "A SAVEPOINT is not a disk snapshot; it is a logical marker held in memory within the current transaction session."
+      },
+      "difficulty": "medium",
+      "tags": ["transactions", "savepoint"],
+      "reference": "https://en.wikipedia.org/wiki/Savepoint"
+    },
+    {
+      "id": 9,
+      "text": "What is a 'dirty read' in the context of database transaction isolation?",
+      "options": [
+        { "id": "A", "text": "Reading data that has been deleted from the table" },
+        { "id": "B", "text": "Reading uncommitted changes made by another transaction that may later be rolled back" },
+        { "id": "C", "text": "Reading the same row twice and getting different results within one transaction" },
+        { "id": "D", "text": "Reading data from a corrupted page on disk" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A dirty read occurs when transaction A reads data that transaction B has modified but not yet committed. If B later rolls back, A has read data that never officially existed — hence 'dirty'. This is only possible at the Read Uncommitted isolation level.",
+      "wrongAnswerFeedback": {
+        "A": "Reading deleted data is not specifically called a dirty read. A dirty read refers to reading uncommitted in-flight changes.",
+        "C": "Reading the same row twice with different results describes a non-repeatable read, a different anomaly.",
+        "D": "Corrupted disk pages are a storage error, not a transaction isolation anomaly."
+      },
+      "difficulty": "medium",
+      "tags": ["transactions", "isolation", "dirty-read"],
+      "reference": "https://en.wikipedia.org/wiki/Isolation_(database_systems)#Dirty_reads"
+    },
+    {
+      "id": 10,
+      "text": "Which SQL transaction isolation level is the MOST strict, ensuring complete serialization of transactions?",
+      "options": [
+        { "id": "A", "text": "Read Uncommitted" },
+        { "id": "B", "text": "Read Committed" },
+        { "id": "C", "text": "Repeatable Read" },
+        { "id": "D", "text": "Serializable" }
+      ],
+      "correctAnswer": "D",
+      "explanation": "Serializable is the highest isolation level. It ensures transactions execute as if they were run one after another, preventing dirty reads, non-repeatable reads, and phantom reads. The trade-off is lower concurrency and higher overhead.",
+      "wrongAnswerFeedback": {
+        "A": "Read Uncommitted is the LEAST strict level — it allows dirty reads and provides no real isolation.",
+        "B": "Read Committed prevents dirty reads but still allows non-repeatable reads.",
+        "C": "Repeatable Read prevents dirty and non-repeatable reads but can still allow phantom reads."
+      },
+      "difficulty": "medium",
+      "tags": ["transactions", "isolation-levels"],
+      "reference": "https://en.wikipedia.org/wiki/Isolation_(database_systems)#Isolation_levels"
+    },
+    {
+      "id": 11,
+      "text": "What data structure do most relational databases (like PostgreSQL and MySQL InnoDB) use as their default index structure?",
+      "options": [
+        { "id": "A", "text": "Hash table" },
+        { "id": "B", "text": "B-tree (Balanced tree)" },
+        { "id": "C", "text": "Skip list" },
+        { "id": "D", "text": "Red-black tree" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Most relational databases use B-tree (or B+ tree) indexes by default. B-trees keep data sorted and allow searches, sequential access, insertions, and deletions in O(log n) time. They are well-suited for range queries and remain balanced on disk.",
+      "wrongAnswerFeedback": {
+        "A": "Hash indexes are available in some databases but are only efficient for exact-match lookups, not range queries.",
+        "C": "Skip lists are used in some in-memory databases (like Redis for sorted sets) but are not the default disk-based index structure.",
+        "D": "Red-black trees are a balanced BST used in-memory (e.g., in programming language libraries), but not typical for on-disk database indexes."
+      },
+      "difficulty": "medium",
+      "tags": ["indexes", "b-tree"],
+      "reference": "https://en.wikipedia.org/wiki/B-tree"
+    },
+    {
+      "id": 12,
+      "text": "What is a clustered index?",
+      "options": [
+        { "id": "A", "text": "An index that groups multiple columns into a single index entry" },
+        { "id": "B", "text": "An index that physically orders the table data on disk according to the index key" },
+        { "id": "C", "text": "An index shared across multiple tables in the same schema" },
+        { "id": "D", "text": "An index automatically created on every foreign key column" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A clustered index determines the physical storage order of rows in a table. Because there can only be one physical ordering, a table can have at most one clustered index. In InnoDB (MySQL), the primary key is always the clustered index.",
+      "wrongAnswerFeedback": {
+        "A": "An index over multiple columns is called a composite index, not a clustered index.",
+        "C": "Indexes are per-table structures; they are not shared across multiple tables.",
+        "D": "Foreign key indexes may be created automatically in some databases, but that is not what a clustered index means."
+      },
+      "difficulty": "medium",
+      "tags": ["indexes", "clustered-index"],
+      "reference": "https://en.wikipedia.org/wiki/Database_index#Clustered"
+    },
+    {
+      "id": 13,
+      "text": "Which of the following scenarios would generally NOT benefit from adding a database index?",
+      "options": [
+        { "id": "A", "text": "Filtering a table of 10 million users by email address" },
+        { "id": "B", "text": "A small lookup table with only 50 rows" },
+        { "id": "C", "text": "A join column used frequently in multi-table queries" },
+        { "id": "D", "text": "A timestamp column used in date-range WHERE clauses" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "For very small tables, a full table scan is often faster than using an index because the overhead of index lookup and random I/O outweighs the benefit. The query planner will typically ignore an index on a tiny table anyway.",
+      "wrongAnswerFeedback": {
+        "A": "A large table filtered by a high-cardinality column like email is a prime candidate for an index — it dramatically reduces scan cost.",
+        "C": "Join columns are excellent index candidates; indexes on foreign keys speed up join operations significantly.",
+        "D": "Range queries on timestamps benefit greatly from B-tree indexes, which support ordered range scans efficiently."
+      },
+      "difficulty": "medium",
+      "tags": ["indexes", "query-optimization"],
+      "reference": "https://use-the-index-luke.com/sql/where-clause/the-equals-operator/primary-keys"
+    },
+    {
+      "id": 14,
+      "text": "What is a database connection pool?",
+      "options": [
+        { "id": "A", "text": "A pool of pre-allocated disk pages reserved for database writes" },
+        { "id": "B", "text": "A cache of pre-established database connections reused by multiple application requests" },
+        { "id": "C", "text": "A cluster of read replicas that share query load" },
+        { "id": "D", "text": "A buffer that holds uncommitted transaction data in memory" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A connection pool maintains a set of open database connections that can be reused across multiple application requests. Creating a new database connection is expensive (TCP handshake, authentication, memory allocation), so pooling reduces latency and resource usage significantly.",
+      "wrongAnswerFeedback": {
+        "A": "Pre-allocated disk pages describe a database buffer pool or tablespace reservation, not a connection pool.",
+        "C": "Read replicas and load balancing are a separate scalability concern from connection pooling.",
+        "D": "Uncommitted transaction data in memory is related to the database buffer pool or WAL, not connection pooling."
+      },
+      "difficulty": "easy",
+      "tags": ["connection-pool", "performance"],
+      "reference": "https://en.wikipedia.org/wiki/Connection_pool"
+    },
+    {
+      "id": 15,
+      "text": "What typically happens when an application requests a connection but all connections in the pool are already in use?",
+      "options": [
+        { "id": "A", "text": "The database automatically creates unlimited new connections" },
+        { "id": "B", "text": "The request waits (blocks) until a connection becomes available or a timeout occurs" },
+        { "id": "C", "text": "The application silently skips the query and returns an empty result" },
+        { "id": "D", "text": "The pool immediately kills the longest-running query to free a connection" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "When the pool is exhausted, new requests are queued and wait for a connection to be released. If no connection becomes available within the configured timeout, the request fails with a pool exhaustion error (e.g., 'connection timeout'). This is a common production bottleneck under high traffic.",
+      "wrongAnswerFeedback": {
+        "A": "Allowing unlimited connections would overwhelm the database server; pool-size limits exist precisely to prevent this.",
+        "C": "Connection pool exhaustion is a fatal error for the request, not a silent skip — the application needs to handle or propagate the failure.",
+        "D": "Connection pools do not interfere with running queries on other connections. Only DBA-level tools can forcefully kill sessions."
+      },
+      "difficulty": "medium",
+      "tags": ["connection-pool", "performance"],
+      "reference": "https://en.wikipedia.org/wiki/Connection_pool"
+    },
+    {
+      "id": 16,
+      "text": "What is a Write-Ahead Log (WAL) in a database?",
+      "options": [
+        { "id": "A", "text": "A log of all SQL queries executed by users, stored for auditing purposes" },
+        { "id": "B", "text": "A sequential log where changes are written before being applied to actual data pages, enabling crash recovery" },
+        { "id": "C", "text": "A list of pending write operations waiting in the connection pool queue" },
+        { "id": "D", "text": "A temporary table that stores data before it is moved to permanent storage" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "The Write-Ahead Log is a foundational durability mechanism. Before modifying data pages on disk, the database records the intended changes in a sequential log file. If the system crashes, the database replays the WAL to restore consistency. WAL also enables replication and point-in-time recovery.",
+      "wrongAnswerFeedback": {
+        "A": "An audit log of SQL statements is a separate feature (query logging). WAL specifically records page-level changes for crash recovery.",
+        "C": "Pending write operations in a queue is not what WAL means — WAL entries are already-committed changes written sequentially before data pages are updated.",
+        "D": "A temporary table is a user-visible SQL object, unrelated to the internal WAL mechanism."
+      },
+      "difficulty": "medium",
+      "tags": ["wal", "durability", "internals"],
+      "reference": "https://www.postgresql.org/docs/current/wal-intro.html"
+    },
+    {
+      "id": 17,
+      "text": "What is a 'page' (also called a 'block') in the context of database storage?",
+      "options": [
+        { "id": "A", "text": "A single row of data in a table" },
+        { "id": "B", "text": "The fixed-size unit of data that a database reads from and writes to disk" },
+        { "id": "C", "text": "A web page served by the database's admin interface" },
+        { "id": "D", "text": "A partition of a large table split across multiple servers" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A page is the smallest unit of I/O in a database. PostgreSQL uses 8 KB pages by default; MySQL InnoDB uses 16 KB. Even if you update one byte, the entire page is read into memory, modified, and written back. Understanding pages is key to understanding database I/O performance.",
+      "wrongAnswerFeedback": {
+        "A": "Individual rows are stored inside pages, but a page typically contains many rows.",
+        "C": "A database page is a storage concept, not related to web interfaces.",
+        "D": "Splitting data across servers describes sharding or partitioning, which is unrelated to the concept of a storage page."
+      },
+      "difficulty": "medium",
+      "tags": ["storage", "internals", "io"],
+      "reference": "https://www.postgresql.org/docs/current/storage-page-layout.html"
+    },
+    {
+      "id": 18,
+      "text": "What is the buffer pool (also called buffer cache) in a database engine?",
+      "options": [
+        { "id": "A", "text": "A pool of cached SQL query results returned to the application" },
+        { "id": "B", "text": "An in-memory area that caches disk pages so reads and writes avoid hitting disk directly" },
+        { "id": "C", "text": "A set of pre-compiled query execution plans stored in memory" },
+        { "id": "D", "text": "A temporary storage area for in-flight network packets between the app and the database" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "The buffer pool holds copies of data pages in RAM. When a query needs a page, the database first checks the buffer pool. Cache hits avoid slow disk I/O entirely. Modified (dirty) pages remain in memory until flushed to disk. A larger buffer pool dramatically improves performance for working-set data.",
+      "wrongAnswerFeedback": {
+        "A": "Caching query results is a separate concept (query result cache). The buffer pool caches raw pages, not query outputs.",
+        "C": "Pre-compiled plans are stored in the plan cache, a separate structure from the buffer pool.",
+        "D": "Network packet buffering is handled by the OS and network stack, not by the database buffer pool."
+      },
+      "difficulty": "medium",
+      "tags": ["buffer-pool", "memory", "internals"],
+      "reference": "https://dev.mysql.com/doc/refman/8.0/en/innodb-buffer-pool.html"
+    },
+    {
+      "id": 19,
+      "text": "What is a database checkpoint?",
+      "options": [
+        { "id": "A", "text": "A point in a transaction where a SAVEPOINT is recorded" },
+        { "id": "B", "text": "A periodic operation where all dirty pages in the buffer pool are flushed to disk and the WAL is truncated" },
+        { "id": "C", "text": "A scheduled backup of the entire database to a remote server" },
+        { "id": "D", "text": "A validation step that checks referential integrity before a commit" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A checkpoint flushes all modified (dirty) pages from the buffer pool to disk and records the checkpoint location in the WAL. This limits the amount of WAL that must be replayed after a crash and allows old WAL segments to be discarded, saving disk space.",
+      "wrongAnswerFeedback": {
+        "A": "A SAVEPOINT is a user-visible transaction feature. A checkpoint is an internal storage engine operation.",
+        "C": "A checkpoint is not a backup operation. Backups copy data to another location; checkpoints just flush in-memory dirty pages to the primary data files.",
+        "D": "Referential integrity checks happen during DML operations (INSERT/UPDATE/DELETE), not during checkpoints."
+      },
+      "difficulty": "hard",
+      "tags": ["checkpoint", "wal", "internals"],
+      "reference": "https://www.postgresql.org/docs/current/wal-configuration.html"
+    },
+    {
+      "id": 20,
+      "text": "What is MVCC (Multi-Version Concurrency Control)?",
+      "options": [
+        { "id": "A", "text": "A replication strategy that maintains multiple database replicas for high availability" },
+        { "id": "B", "text": "A concurrency technique where multiple versions of a row are kept so readers don't block writers and vice versa" },
+        { "id": "C", "text": "A versioning system for database schemas that tracks DDL changes over time" },
+        { "id": "D", "text": "A method of compressing multiple versions of a table into a single file on disk" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "MVCC allows readers and writers to operate concurrently without locking each other. When a row is updated, the old version is kept. Readers see a snapshot of the data as of their transaction start time, while writers create new row versions. PostgreSQL, InnoDB, and Oracle all use MVCC.",
+      "wrongAnswerFeedback": {
+        "A": "High availability replicas are a separate concept. MVCC operates within a single database instance.",
+        "C": "Schema versioning (migrations) is a development practice unrelated to MVCC, which is about row-level concurrency.",
+        "D": "MVCC is a logical concurrency mechanism, not a disk compression technique."
+      },
+      "difficulty": "hard",
+      "tags": ["mvcc", "concurrency", "internals"],
+      "reference": "https://www.postgresql.org/docs/current/mvcc-intro.html"
+    },
+    {
+      "id": 21,
+      "text": "What is a deadlock in a database?",
+      "options": [
+        { "id": "A", "text": "A query that runs indefinitely due to a missing index" },
+        { "id": "B", "text": "A situation where two or more transactions wait for each other to release locks, causing all of them to be stuck forever" },
+        { "id": "C", "text": "A database node that becomes unresponsive when disk I/O exceeds its limit" },
+        { "id": "D", "text": "A state where the WAL file grows too large and halts new writes" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A deadlock occurs when Transaction A holds a lock that Transaction B needs, and Transaction B holds a lock that Transaction A needs. Neither can proceed. Databases detect deadlocks automatically (usually via a cycle-detection algorithm) and resolve them by aborting one of the transactions.",
+      "wrongAnswerFeedback": {
+        "A": "A slow query missing an index causes poor performance, not a deadlock. Deadlocks are specifically about mutual lock waiting.",
+        "C": "I/O saturation causes performance degradation but is not a deadlock, which is specifically a lock-dependency cycle.",
+        "D": "WAL growth limits are a configuration concern, not a deadlock. Deadlocks are a transaction-level locking phenomenon."
+      },
+      "difficulty": "medium",
+      "tags": ["deadlock", "locking", "transactions"],
+      "reference": "https://en.wikipedia.org/wiki/Deadlock"
+    },
+    {
+      "id": 22,
+      "text": "What is row-level locking in a database?",
+      "options": [
+        { "id": "A", "text": "A lock applied to an entire table to prevent any concurrent access" },
+        { "id": "B", "text": "A lock placed on individual rows so concurrent transactions can modify different rows in the same table simultaneously" },
+        { "id": "C", "text": "A read-only lock on a table column applied during index creation" },
+        { "id": "D", "text": "A lock on an entire database file acquired during a checkpoint" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Row-level locking allows multiple transactions to modify different rows in the same table at the same time. Only transactions accessing the exact same row are blocked from each other. This provides much higher concurrency than table-level locking, which blocks all writers even for unrelated rows.",
+      "wrongAnswerFeedback": {
+        "A": "A lock on the entire table is called a table-level lock, which is much coarser and blocks more concurrency.",
+        "C": "Index creation may take a table lock temporarily, but that is not what row-level locking means.",
+        "D": "Checkpoint operations interact with the buffer pool and WAL, not row-level locks."
+      },
+      "difficulty": "medium",
+      "tags": ["locking", "concurrency", "internals"],
+      "reference": "https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html"
+    },
+    {
+      "id": 23,
+      "text": "What is a 'dirty page' in the context of a database buffer pool?",
+      "options": [
+        { "id": "A", "text": "A page that contains corrupted or invalid data due to a disk error" },
+        { "id": "B", "text": "A page in memory that has been modified but not yet written back to disk" },
+        { "id": "C", "text": "A page that belongs to a deleted table but still occupies disk space" },
+        { "id": "D", "text": "A page that is accessed by more than one transaction at the same time" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A dirty page is a buffer pool page that has been modified in memory but whose changes have not yet been persisted to the data file on disk. Dirty pages are eventually flushed to disk during checkpoints or when evicted from the buffer pool. They are the reason WAL is critical — if the system crashes, dirty pages that weren't flushed can be recovered from the log.",
+      "wrongAnswerFeedback": {
+        "A": "Corrupted data is a storage hardware issue, not what 'dirty page' means. Dirty just means 'modified but not flushed'.",
+        "C": "Pages from deleted tables are reclaimed through vacuum or space reclamation operations, not called dirty pages.",
+        "D": "Concurrent access to a page is handled by the lock manager, not related to the dirty/clean distinction."
+      },
+      "difficulty": "medium",
+      "tags": ["buffer-pool", "dirty-page", "internals"],
+      "reference": "https://en.wikipedia.org/wiki/Page_cache#Dirty_pages"
+    },
+    {
+      "id": 24,
+      "text": "What is a covering index?",
+      "options": [
+        { "id": "A", "text": "An index that spans all tables in a database schema" },
+        { "id": "B", "text": "An index that includes all the columns needed by a query, allowing it to be answered from the index alone without accessing the table" },
+        { "id": "C", "text": "An index created automatically to cover any column used in a WHERE clause" },
+        { "id": "D", "text": "A backup index created when the primary index is being rebuilt" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A covering index contains all the columns a query needs — both the filter columns and the selected columns. The query engine can satisfy the entire query from the index structure, avoiding the extra I/O of fetching the actual table rows (heap fetch). This can dramatically speed up read-heavy queries.",
+      "wrongAnswerFeedback": {
+        "A": "There is no such concept as a schema-spanning index. A covering index is defined per query and per table.",
+        "C": "Indexes must be explicitly created; there is no automatic index that covers all WHERE clause columns.",
+        "D": "A backup index for rebuild scenarios is not a standard database concept. Covering index specifically means the index data satisfies the full query."
+      },
+      "difficulty": "hard",
+      "tags": ["indexes", "covering-index", "query-optimization"],
+      "reference": "https://use-the-index-luke.com/sql/clustering/index-only-scan-covering-index"
+    },
+    {
+      "id": 25,
+      "text": "What is write amplification in database storage?",
+      "options": [
+        { "id": "A", "text": "When a single logical write causes multiple physical writes to disk due to page size, WAL, and index updates" },
+        { "id": "B", "text": "When the database increases the size of a write buffer to handle bursts of traffic" },
+        { "id": "C", "text": "When replication sends the same write to multiple replicas simultaneously" },
+        { "id": "D", "text": "When a transaction writes the same row multiple times before committing" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "Write amplification means that one logical write (e.g., updating one row) triggers multiple physical writes: the WAL entry, the dirty data page flush, index page updates, and possibly free-space map updates. This is normal behavior but understanding it helps explain why disk write throughput can become a bottleneck even for seemingly small workloads.",
+      "wrongAnswerFeedback": {
+        "B": "Dynamically sizing a write buffer is a memory management strategy, not write amplification.",
+        "C": "Replication fan-out is a related but separate concern. Write amplification refers to physical I/O multiplied within a single node.",
+        "D": "Writing the same row multiple times in one transaction is an application logic issue, not write amplification."
+      },
+      "difficulty": "hard",
+      "tags": ["storage", "internals", "performance"],
+      "reference": "https://en.wikipedia.org/wiki/Write_amplification"
+    },
+    {
+      "id": 26,
+      "text": "What is an LSM tree (Log-Structured Merge-tree) and which type of workload is it optimized for?",
+      "options": [
+        { "id": "A", "text": "A tree structure for parsing SQL syntax, optimized for complex SELECT queries" },
+        { "id": "B", "text": "A write-optimized storage structure that batches writes sequentially and merges sorted files in the background" },
+        { "id": "C", "text": "A read-optimized B-tree variant that stores data in sorted pages for fast range scans" },
+        { "id": "D", "text": "A distributed hash ring used in NoSQL clusters to route reads and writes to the correct node" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "LSM trees (used in Cassandra, RocksDB, LevelDB) optimize for high-throughput writes by converting random writes into sequential disk writes. Writes are first buffered in memory (memtable), then flushed as immutable sorted files (SSTables) and periodically merged (compacted). The trade-off is that reads may need to check multiple files.",
+      "wrongAnswerFeedback": {
+        "A": "LSM trees are a storage engine concept, not a query parser structure.",
+        "C": "A read-optimized sorted B-tree describes the standard B+tree used in relational databases. LSM trees favor writes over reads.",
+        "D": "Consistent hashing / hash rings are used for distributing data in distributed systems, not what an LSM tree is."
+      },
+      "difficulty": "hard",
+      "tags": ["lsm-tree", "storage", "nosql", "internals"],
+      "reference": "https://en.wikipedia.org/wiki/Log-structured_merge-tree"
+    },
+    {
+      "id": 27,
+      "text": "What is the difference between a sequential scan and an index scan in a database query?",
+      "options": [
+        { "id": "A", "text": "A sequential scan is faster on large tables; an index scan is faster on small tables" },
+        { "id": "B", "text": "A sequential scan reads all table pages from disk; an index scan follows the index to read only the relevant pages" },
+        { "id": "C", "text": "Sequential scans use RAM only; index scans always require disk I/O" },
+        { "id": "D", "text": "A sequential scan returns rows in primary key order; an index scan returns rows in insertion order" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A sequential scan (full table scan) reads every page of the table. An index scan uses the index structure to jump directly to the relevant rows. Index scans are faster when selectivity is high (returning few rows). For queries returning a large fraction of rows, sequential scans can be faster due to better I/O prefetching and lower overhead.",
+      "wrongAnswerFeedback": {
+        "A": "This is almost backwards. Sequential scans can be faster on small tables where the overhead of index lookups isn't worth it. For large tables with selective queries, indexes win.",
+        "C": "Both scan types may involve disk I/O. The buffer pool caches pages for both. Sequential scans benefit from OS read-ahead.",
+        "D": "Neither scan type guarantees a specific row order without an ORDER BY clause."
+      },
+      "difficulty": "medium",
+      "tags": ["query-execution", "indexes", "performance"],
+      "reference": "https://www.postgresql.org/docs/current/planner-optimizer.html"
+    },
+    {
+      "id": 28,
+      "text": "What is a VACUUM operation in PostgreSQL (or its equivalent in other databases)?",
+      "options": [
+        { "id": "A", "text": "An operation that compresses all table data to reduce disk usage" },
+        { "id": "B", "text": "An operation that reclaims storage occupied by dead row versions created by updates and deletes under MVCC" },
+        { "id": "C", "text": "A process that rebuilds all indexes from scratch to remove fragmentation" },
+        { "id": "D", "text": "A scheduled operation that archives old data to a cold storage tier" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Because PostgreSQL uses MVCC, old row versions (dead tuples) are kept on disk after updates and deletes so in-flight transactions can still see them. VACUUM scans tables and reclaims the space occupied by dead tuples that are no longer needed by any active transaction. Without regular vacuuming, table bloat grows and can even cause transaction ID wraparound issues.",
+      "wrongAnswerFeedback": {
+        "A": "VACUUM does not compress data. VACUUM FULL rewrites the table to reclaim space, but general VACUUM just marks dead space as reusable.",
+        "C": "REINDEX is the operation that rebuilds indexes. VACUUM handles dead row versions, not index fragmentation.",
+        "D": "Data archiving is an application-level concern or a partitioning strategy, not what VACUUM does."
+      },
+      "difficulty": "hard",
+      "tags": ["vacuum", "mvcc", "postgresql", "internals"],
+      "reference": "https://www.postgresql.org/docs/current/routine-vacuuming.html"
+    },
+    {
+      "id": 29,
+      "text": "When a database executes a SELECT query, what typically happens first if the needed pages are already in the buffer pool?",
+      "options": [
+        { "id": "A", "text": "The database reads the pages fresh from disk to ensure consistency" },
+        { "id": "B", "text": "The database serves the query directly from the in-memory buffer pool pages, with no disk I/O" },
+        { "id": "C", "text": "The database writes a log entry before reading any data" },
+        { "id": "D", "text": "The database acquires an exclusive lock on all pages before serving the read" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "When a required page is already in the buffer pool (a cache hit), the database reads directly from memory. Disk I/O is the primary performance bottleneck in most database workloads, so a well-sized buffer pool that keeps the frequently accessed 'hot' pages in memory is one of the most impactful performance optimizations.",
+      "wrongAnswerFeedback": {
+        "A": "Re-reading from disk on every query would defeat the purpose of the buffer pool cache. Databases trust their in-memory page copies.",
+        "C": "Read operations (SELECT) do not require WAL entries. WAL is written for data modifications (INSERT, UPDATE, DELETE).",
+        "D": "Regular reads do not require exclusive locks. Databases use shared locks (or MVCC snapshots) for reads, allowing concurrent reads."
+      },
+      "difficulty": "easy",
+      "tags": ["buffer-pool", "read-path", "performance"],
+      "reference": "https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-SHARED-BUFFERS"
+    },
+    {
+      "id": 30,
+      "text": "Why is it important to keep the number of open database connections below the database server's configured maximum?",
+      "options": [
+        { "id": "A", "text": "Because each open connection encrypts all traffic, slowing down the database proportionally" },
+        { "id": "B", "text": "Because each connection consumes server resources (memory, file descriptors, background processes), and too many connections degrade performance and can crash the server" },
+        { "id": "C", "text": "Because databases limit connections to prevent too many indexes from being created simultaneously" },
+        { "id": "D", "text": "Because open connections prevent the WAL from being flushed to disk" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Each database connection is not free — it requires memory for the connection state, a file descriptor, and in some databases (like PostgreSQL) a dedicated backend process. Hundreds or thousands of open idle connections can exhaust server memory and degrade performance. This is why connection poolers like PgBouncer or HikariCP are used to multiplex application connections onto a smaller pool of real server connections.",
+      "wrongAnswerFeedback": {
+        "A": "TLS encryption overhead is independent of the number of connections. All connections may use TLS, and that cost is per-connection setup, not ongoing.",
+        "C": "Index creation is a DDL operation entirely unrelated to connection count limits.",
+        "D": "WAL flushing is controlled by commit settings and checkpoint timing, not by the number of open connections."
+      },
+      "difficulty": "medium",
+      "tags": ["connection-pool", "performance", "scalability"],
+      "reference": "https://www.postgresql.org/docs/current/runtime-config-connection.html"
+    }
+  ]
+}

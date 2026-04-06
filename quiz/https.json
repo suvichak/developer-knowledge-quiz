@@ -1,0 +1,429 @@
+{
+  "meta": {
+    "id": "https",
+    "version": "1.0",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07",
+    "author": "Developer Knowledge Quiz",
+    "language": "en"
+  },
+  "quiz": {
+    "title": "How HTTPS Works",
+    "subtitle": "Secure web communication from basics to TLS internals",
+    "description": "Test your understanding of HTTPS, TLS/SSL, certificates, handshakes, and secure communication on the web.",
+    "category": "Web Security",
+    "tags": ["https", "tls", "ssl", "security", "certificates", "web"],
+    "icon": "🔒",
+    "difficulty": "mixed",
+    "estimatedMinutes": 15
+  },
+  "settings": {
+    "shuffleQuestions": false,
+    "shuffleOptions": false,
+    "passingScore": 70,
+    "showProgressBar": true,
+    "allowRetake": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "text": "What does HTTPS stand for?",
+      "options": [
+        { "id": "A", "text": "HyperText Transfer Protocol Secure" },
+        { "id": "B", "text": "HyperText Transport Protocol Standard" },
+        { "id": "C", "text": "High Transfer Protocol Secure" },
+        { "id": "D", "text": "HyperText Transmission Privacy System" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "HTTPS stands for HyperText Transfer Protocol Secure. It is HTTP with an added layer of encryption provided by TLS (Transport Layer Security).",
+      "wrongAnswerFeedback": {
+        "B": "There is no 'Standard' variant — the S stands for Secure, and the protocol is TLS, not 'Transport'.",
+        "C": "The H stands for HyperText, not High.",
+        "D": "HTTPS is not a privacy system acronym; it simply adds the word Secure to HTTP."
+      },
+      "difficulty": "easy",
+      "tags": ["https", "basics"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/HTTPS"
+    },
+    {
+      "id": 2,
+      "text": "On which default port does HTTPS operate?",
+      "options": [
+        { "id": "A", "text": "80" },
+        { "id": "B", "text": "443" },
+        { "id": "C", "text": "8080" },
+        { "id": "D", "text": "22" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "HTTPS uses port 443 by default. Plain HTTP uses port 80. Port 8080 is common for development servers and port 22 is SSH.",
+      "wrongAnswerFeedback": {
+        "A": "Port 80 is reserved for plain HTTP, not HTTPS.",
+        "C": "Port 8080 is an alternate HTTP port frequently used in development, not the HTTPS default.",
+        "D": "Port 22 is used by SSH (Secure Shell), not HTTPS."
+      },
+      "difficulty": "easy",
+      "tags": ["https", "ports"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/HTTPS"
+    },
+    {
+      "id": 3,
+      "text": "Which protocol does HTTPS use to encrypt data?",
+      "options": [
+        { "id": "A", "text": "SSH" },
+        { "id": "B", "text": "FTP" },
+        { "id": "C", "text": "TLS" },
+        { "id": "D", "text": "IPSec" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "HTTPS uses TLS (Transport Layer Security) to encrypt the connection. SSL was the predecessor, but modern HTTPS uses TLS.",
+      "wrongAnswerFeedback": {
+        "A": "SSH (Secure Shell) is a separate protocol used for secure remote login, not for web traffic encryption.",
+        "B": "FTP (File Transfer Protocol) is a file transfer protocol and is not an encryption layer.",
+        "D": "IPSec operates at the network layer and is typically used in VPNs, not in HTTPS."
+      },
+      "difficulty": "easy",
+      "tags": ["https", "tls"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/TLS"
+    },
+    {
+      "id": 4,
+      "text": "What is the main purpose of an SSL/TLS certificate?",
+      "options": [
+        { "id": "A", "text": "To speed up page loading" },
+        { "id": "B", "text": "To verify the server's identity and enable encryption" },
+        { "id": "C", "text": "To compress website assets" },
+        { "id": "D", "text": "To block malicious users" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "An SSL/TLS certificate serves two purposes: it authenticates the server's identity (so the client knows who it is talking to) and it contains the public key needed to initiate encrypted communication.",
+      "wrongAnswerFeedback": {
+        "A": "Certificates have no effect on page load speed; they are for security, not performance.",
+        "C": "Compression is handled separately (e.g., gzip/Brotli). Certificates are not involved.",
+        "D": "Blocking malicious users is the role of firewalls and WAFs, not TLS certificates."
+      },
+      "difficulty": "easy",
+      "tags": ["certificates", "identity"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/SSL"
+    },
+    {
+      "id": 5,
+      "text": "What does the padlock icon in a browser's address bar indicate?",
+      "options": [
+        { "id": "A", "text": "The website is completely safe and trustworthy" },
+        { "id": "B", "text": "The connection between your browser and the server is encrypted" },
+        { "id": "C", "text": "The website has no ads" },
+        { "id": "D", "text": "Your password is saved for this site" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "The padlock means the connection is encrypted with TLS. It does NOT mean the website itself is trustworthy or malware-free — phishing sites can also use HTTPS.",
+      "wrongAnswerFeedback": {
+        "A": "HTTPS only means the connection is encrypted. A site can still be malicious even with a padlock.",
+        "C": "The padlock has nothing to do with advertisements.",
+        "D": "Saved passwords are a browser feature unrelated to the TLS padlock."
+      },
+      "difficulty": "easy",
+      "tags": ["https", "browser"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/Security/Transport_Layer_Security"
+    },
+    {
+      "id": 6,
+      "text": "Who issues SSL/TLS certificates to websites?",
+      "options": [
+        { "id": "A", "text": "Browser vendors like Google or Mozilla" },
+        { "id": "B", "text": "Certificate Authorities (CAs)" },
+        { "id": "C", "text": "Internet Service Providers (ISPs)" },
+        { "id": "D", "text": "The website owner creates their own via the browser" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Certificate Authorities (CAs) are trusted organizations that issue and digitally sign TLS certificates. Examples include Let's Encrypt, DigiCert, and Comodo.",
+      "wrongAnswerFeedback": {
+        "A": "Browser vendors maintain a list of trusted CAs but do not issue certificates themselves.",
+        "C": "ISPs provide internet connectivity; they do not issue TLS certificates.",
+        "D": "While self-signed certificates exist, they are not issued by the browser and are not trusted by default."
+      },
+      "difficulty": "easy",
+      "tags": ["certificates", "CA"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/Certificate_authority"
+    },
+    {
+      "id": 7,
+      "text": "What type of encryption does TLS use for the actual data transfer after the handshake?",
+      "options": [
+        { "id": "A", "text": "Asymmetric encryption" },
+        { "id": "B", "text": "Symmetric encryption" },
+        { "id": "C", "text": "Hashing" },
+        { "id": "D", "text": "Base64 encoding" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "After the TLS handshake establishes a shared session key (using asymmetric encryption), all subsequent data is encrypted with symmetric encryption because it is much faster.",
+      "wrongAnswerFeedback": {
+        "A": "Asymmetric encryption is used during the handshake to securely exchange keys, not for bulk data.",
+        "C": "Hashing is a one-way operation used for integrity checks, not for encryption.",
+        "D": "Base64 is an encoding scheme, not encryption. It provides no confidentiality."
+      },
+      "difficulty": "easy",
+      "tags": ["tls", "encryption"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/Symmetric-key_cryptography"
+    },
+    {
+      "id": 8,
+      "text": "What is the predecessor protocol to TLS?",
+      "options": [
+        { "id": "A", "text": "SSH" },
+        { "id": "B", "text": "SFTP" },
+        { "id": "C", "text": "SSL" },
+        { "id": "D", "text": "IPSec" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "SSL (Secure Sockets Layer) was the predecessor to TLS. All SSL versions (1.0, 2.0, 3.0) are now deprecated due to security vulnerabilities. TLS is the modern replacement.",
+      "wrongAnswerFeedback": {
+        "A": "SSH is a separate secure protocol for remote shell access, not a predecessor to TLS.",
+        "B": "SFTP is a file transfer protocol layered over SSH, not related to TLS ancestry.",
+        "D": "IPSec is a network-layer VPN protocol unrelated to TLS's lineage."
+      },
+      "difficulty": "easy",
+      "tags": ["ssl", "tls", "history"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/SSL"
+    },
+    {
+      "id": 9,
+      "text": "If you visit a website over HTTP instead of HTTPS, what risk do you face?",
+      "options": [
+        { "id": "A", "text": "The page loads slower" },
+        { "id": "B", "text": "Data sent to and from the server can be read or modified by attackers on the network" },
+        { "id": "C", "text": "The server cannot process your requests" },
+        { "id": "D", "text": "Your IP address is revealed to the server" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "HTTP sends all data in plain text. Anyone on the same network (e.g., a coffee shop Wi-Fi) can intercept and read or tamper with the traffic — a man-in-the-middle attack.",
+      "wrongAnswerFeedback": {
+        "A": "HTTPS can actually add minor overhead, but HTTP is not meaningfully faster for security reasons.",
+        "C": "HTTP and HTTPS servers both process requests; protocol choice does not prevent server processing.",
+        "D": "Your IP is visible to the server regardless of whether you use HTTP or HTTPS."
+      },
+      "difficulty": "easy",
+      "tags": ["https", "security", "http"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"
+    },
+    {
+      "id": 10,
+      "text": "What does a free certificate provider like Let's Encrypt offer?",
+      "options": [
+        { "id": "A", "text": "Extended Validation (EV) certificates with company name in the browser" },
+        { "id": "B", "text": "Free, automatically renewable Domain Validation (DV) certificates" },
+        { "id": "C", "text": "Wildcard certificates for a one-time fee" },
+        { "id": "D", "text": "Hardware Security Modules for certificate storage" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Let's Encrypt provides free Domain Validation (DV) certificates that can be automatically renewed every 90 days using the ACME protocol. It has dramatically increased HTTPS adoption.",
+      "wrongAnswerFeedback": {
+        "A": "EV certificates require manual identity verification and are not offered free by Let's Encrypt.",
+        "C": "Let's Encrypt does support wildcard certs but they are free, not for a one-time fee.",
+        "D": "HSMs are hardware devices; Let's Encrypt is a CA, not an HSM provider."
+      },
+      "difficulty": "easy",
+      "tags": ["certificates", "lets-encrypt"],
+      "reference": "https://letsencrypt.org/about/"
+    },
+    {
+      "id": 11,
+      "text": "During the TLS handshake, what is the purpose of the 'ClientHello' message?",
+      "options": [
+        { "id": "A", "text": "The client sends its private key to the server" },
+        { "id": "B", "text": "The client announces supported TLS versions, cipher suites, and a random value" },
+        { "id": "C", "text": "The client requests the server's public key directly" },
+        { "id": "D", "text": "The client sends its SSL certificate to the server" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "ClientHello opens the TLS handshake. The client advertises the TLS versions it supports, the cipher suites it can use, and sends a random nonce that will later contribute to the session key derivation.",
+      "wrongAnswerFeedback": {
+        "A": "Private keys are never transmitted — doing so would completely undermine security.",
+        "C": "The public key comes from the server's certificate, sent in 'ServerHello'/'Certificate' messages.",
+        "D": "Client certificates are optional and sent later in mutual TLS (mTLS), not in ClientHello."
+      },
+      "difficulty": "intermediate",
+      "tags": ["tls", "handshake"],
+      "reference": "https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/"
+    },
+    {
+      "id": 12,
+      "text": "What is a cipher suite in the context of TLS?",
+      "options": [
+        { "id": "A", "text": "A set of cryptographic algorithms used together for key exchange, authentication, encryption, and integrity" },
+        { "id": "B", "text": "A list of trusted Certificate Authorities stored in the browser" },
+        { "id": "C", "text": "The password used to unlock a private key" },
+        { "id": "D", "text": "A firewall rule set for HTTPS traffic" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "A cipher suite is a named combination of algorithms: one for key exchange (e.g., ECDHE), one for authentication (e.g., RSA), one for bulk encryption (e.g., AES-256-GCM), and one for integrity/MAC (e.g., SHA-384).",
+      "wrongAnswerFeedback": {
+        "B": "Trusted CAs are stored in the OS/browser trust store, not called a cipher suite.",
+        "C": "A private key passphrase is unrelated to cipher suites.",
+        "D": "Cipher suites are cryptographic specifications, not firewall or network rules."
+      },
+      "difficulty": "intermediate",
+      "tags": ["tls", "cipher-suite"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/Cipher_suite"
+    },
+    {
+      "id": 13,
+      "text": "What is the role of asymmetric encryption during the TLS 1.2 handshake?",
+      "options": [
+        { "id": "A", "text": "To encrypt all HTTP request bodies" },
+        { "id": "B", "text": "To securely establish a shared secret that will be used for symmetric encryption" },
+        { "id": "C", "text": "To compress data before sending" },
+        { "id": "D", "text": "To replace the need for a Certificate Authority" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "In TLS 1.2, asymmetric encryption (e.g., RSA or ECDHE) is used during the handshake to securely exchange a pre-master secret, from which a symmetric session key is derived for the actual data transfer.",
+      "wrongAnswerFeedback": {
+        "A": "HTTP request bodies are encrypted with the symmetric session key, not asymmetric encryption.",
+        "C": "TLS does not perform compression; that is handled at the application or transport layer.",
+        "D": "CAs are still needed for certificate signing; asymmetric crypto does not replace them."
+      },
+      "difficulty": "intermediate",
+      "tags": ["tls", "handshake", "asymmetric"],
+      "reference": "https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/"
+    },
+    {
+      "id": 14,
+      "text": "What is Perfect Forward Secrecy (PFS)?",
+      "options": [
+        { "id": "A", "text": "A guarantee that no TLS handshake ever fails" },
+        { "id": "B", "text": "A property ensuring that session keys cannot be derived from the server's long-term private key, so past sessions stay secure even if the private key is compromised" },
+        { "id": "C", "text": "A technique for caching TLS sessions to avoid repeated handshakes" },
+        { "id": "D", "text": "An algorithm that makes TLS certificates immune to expiry" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "PFS (also called Forward Secrecy) means ephemeral key exchange algorithms (like ECDHE) generate a fresh key pair per session. Compromising the server's private key later cannot decrypt previously recorded sessions.",
+      "wrongAnswerFeedback": {
+        "A": "PFS is a cryptographic property, not a guarantee about handshake reliability.",
+        "C": "Session resumption/caching is a separate TLS feature (Session IDs / Session Tickets).",
+        "D": "PFS has no effect on certificate expiry."
+      },
+      "difficulty": "intermediate",
+      "tags": ["tls", "pfs", "security"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/Forward_secrecy"
+    },
+    {
+      "id": 15,
+      "text": "What major change in TLS 1.3 reduced handshake latency compared to TLS 1.2?",
+      "options": [
+        { "id": "A", "text": "TLS 1.3 removed certificate validation entirely" },
+        { "id": "B", "text": "TLS 1.3 reduced the handshake to 1-RTT (and supports 0-RTT for resumption)" },
+        { "id": "C", "text": "TLS 1.3 uses HTTP/2 exclusively" },
+        { "id": "D", "text": "TLS 1.3 relies on the client to generate all encryption keys" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "TLS 1.3 streamlined the handshake to require only 1 round-trip (1-RTT) versus 2 in TLS 1.2, and supports 0-RTT resumption for returning clients, significantly reducing connection latency.",
+      "wrongAnswerFeedback": {
+        "A": "Certificate validation is still required in TLS 1.3 — removing it would be insecure.",
+        "C": "TLS 1.3 is a transport security protocol and is independent of HTTP version.",
+        "D": "Key exchange is still collaborative; TLS 1.3 uses ECDHE where both sides contribute."
+      },
+      "difficulty": "intermediate",
+      "tags": ["tls", "tls1.3", "performance"],
+      "reference": "https://www.cloudflare.com/learning/ssl/tls-1-3/"
+    },
+    {
+      "id": 16,
+      "text": "What is a Certificate Chain (Chain of Trust)?",
+      "options": [
+        { "id": "A", "text": "A sequence of certificates linking the server certificate back to a trusted Root CA via intermediate CAs" },
+        { "id": "B", "text": "A blockchain used to store certificate revocation data" },
+        { "id": "C", "text": "A list of all active HTTPS connections in the browser" },
+        { "id": "D", "text": "A hash of all certificates installed on a server" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "Browsers trust a set of Root CAs. When a server sends its certificate, it also sends intermediate CA certificates forming a chain. The browser verifies the chain up to a trusted root to validate the server's identity.",
+      "wrongAnswerFeedback": {
+        "B": "Blockchain is not used in standard PKI certificate trust chains.",
+        "C": "Active connections are tracked in browser internals, not in a certificate chain.",
+        "D": "A certificate chain is a hierarchy of signed certificates, not a digest of installed certs."
+      },
+      "difficulty": "intermediate",
+      "tags": ["certificates", "PKI", "chain-of-trust"],
+      "reference": "https://letsencrypt.org/certificates/"
+    },
+    {
+      "id": 17,
+      "text": "What is Certificate Revocation, and which two mechanisms are commonly used?",
+      "options": [
+        { "id": "A", "text": "The process of renewing a certificate; done via ACME and DNSSEC" },
+        { "id": "B", "text": "The process of marking a certificate as no longer trusted before it expires; done via CRL and OCSP" },
+        { "id": "C", "text": "The process of upgrading a DV certificate to EV; done via CAB Forum and PKCS#12" },
+        { "id": "D", "text": "The process of pinning a certificate to a specific domain; done via HPKP and CSP" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "If a private key is compromised or a certificate is mis-issued, the CA can revoke it. CRL (Certificate Revocation List) is a periodically published list; OCSP (Online Certificate Status Protocol) allows real-time status checks.",
+      "wrongAnswerFeedback": {
+        "A": "Renewal is a separate process from revocation. ACME automates renewal but is unrelated to revocation checking.",
+        "C": "Upgrading certificate types is a different process, not revocation.",
+        "D": "HPKP (HTTP Public Key Pinning) was a deprecated browser feature; it is not a revocation mechanism."
+      },
+      "difficulty": "intermediate",
+      "tags": ["certificates", "revocation", "OCSP", "CRL"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/Security/Certificate_Transparency"
+    },
+    {
+      "id": 18,
+      "text": "What does HSTS (HTTP Strict Transport Security) do?",
+      "options": [
+        { "id": "A", "text": "It forces the server to use TLS 1.3 only" },
+        { "id": "B", "text": "It tells the browser to always connect to the site over HTTPS and refuse plain HTTP connections for a specified duration" },
+        { "id": "C", "text": "It encrypts cookies automatically" },
+        { "id": "D", "text": "It pins the certificate public key in the browser cache" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "HSTS is an HTTP response header (`Strict-Transport-Security`) that instructs browsers to only communicate with the site over HTTPS for `max-age` seconds, preventing protocol downgrade attacks.",
+      "wrongAnswerFeedback": {
+        "A": "HSTS does not control the TLS version negotiated; that is up to the server's TLS configuration.",
+        "C": "Cookie encryption is handled by the `Secure` flag on the cookie, not by HSTS.",
+        "D": "Key pinning was the purpose of HPKP, which is now deprecated. HSTS is different."
+      },
+      "difficulty": "intermediate",
+      "tags": ["hsts", "https", "security-headers"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security"
+    },
+    {
+      "id": 19,
+      "text": "What is SNI (Server Name Indication) and why is it important for HTTPS?",
+      "options": [
+        { "id": "A", "text": "SNI is a TLS extension that allows a server to host multiple TLS certificates on the same IP address by sending the hostname at the start of the handshake" },
+        { "id": "B", "text": "SNI is an HTTP/2 feature that multiplexes requests over a single connection" },
+        { "id": "C", "text": "SNI is a DNS record type that maps a domain to its certificate fingerprint" },
+        { "id": "D", "text": "SNI is a browser feature that caches the server's public key for future connections" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "SNI is a TLS extension included in the ClientHello message. The client sends the target hostname so the server can select the correct certificate before the TLS handshake completes — essential for virtual hosting on shared IPs.",
+      "wrongAnswerFeedback": {
+        "B": "HTTP/2 multiplexing is a separate feature at the HTTP layer, not a TLS extension.",
+        "C": "There is no DNS record type for certificate fingerprints in the standard SNI mechanism (TLSA records via DANE are different).",
+        "D": "SNI operates at connection setup, not browser-side key caching."
+      },
+      "difficulty": "intermediate",
+      "tags": ["tls", "sni", "virtual-hosting"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/Server_Name_Indication"
+    },
+    {
+      "id": 20,
+      "text": "What is a man-in-the-middle (MitM) attack in the context of HTTPS, and how does certificate validation prevent it?",
+      "options": [
+        { "id": "A", "text": "An attacker intercepts traffic by presenting a fake certificate; the browser detects this because the fake certificate cannot be validated back to a trusted CA" },
+        { "id": "B", "text": "An attacker floods the server with TLS handshakes; prevented by rate limiting in HTTPS" },
+        { "id": "C", "text": "An attacker reads encrypted packets; prevented by increasing key size" },
+        { "id": "D", "text": "An attacker replaces the CA's root certificate, which HTTPS prevents by using public-key cryptography" }
+      ],
+      "correctAnswer": "A",
+      "explanation": "In a MitM attack the attacker tries to intercept HTTPS by presenting their own certificate. The browser rejects it because it cannot chain to a trusted Root CA. This is why certificate validation is fundamental to HTTPS security.",
+      "wrongAnswerFeedback": {
+        "B": "Flooding with handshakes is a DoS attack, not a classic MitM. HTTPS does not directly prevent DoS.",
+        "C": "TLS already encrypts packets; simply reading encrypted ciphertext reveals nothing. MitM is about impersonating the server.",
+        "D": "An attacker cannot replace the CA root in the user's trusted store without system-level access; that is OS security, not HTTPS per se."
+      },
+      "difficulty": "intermediate",
+      "tags": ["mitm", "certificates", "security"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/MitM"
+    }
+  ]
+}

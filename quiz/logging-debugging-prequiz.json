@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "quizId": "logging-debugging",
+    "version": "1.0",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07"
+  },
+  "prequiz": {
+    "title": "Logging & Debugging",
+    "subtitle": "Dev term or Pokémon? You decide.",
+    "description": "Before the quiz, sharpen your eye. Each card below is either a real logging/debugging keyword or a Pokémon name sneaked in. Mark each one — Pokémon names won't appear in the quiz, but the real terms will. Can you tell them apart?",
+    "instruction": "For each term, decide: is it a genuine developer concept, or a Pokémon in disguise?",
+    "icon": "🪲"
+  },
+  "keywords": [
+    { "term": "Stack Trace",        "category": "Debugging",       "pokemon": "no"  },
+    { "term": "Magnemite",          "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "Log Level",          "category": "Logging",         "pokemon": "no"  },
+    { "term": "Correlation ID",     "category": "Distributed",     "pokemon": "no"  },
+    { "term": "Haunter",            "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "grep",               "category": "Command Line",    "pokemon": "no"  },
+    { "term": "Structured Logging", "category": "Logging",         "pokemon": "no"  },
+    { "term": "Snorlax",            "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "Timestamp",          "category": "Logging",         "pokemon": "no"  },
+    { "term": "Distributed Trace",  "category": "Observability",   "pokemon": "no"  },
+    { "term": "Arcanine",           "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "NullPointerException","category": "Exceptions",     "pokemon": "no"  },
+    { "term": "Log Aggregator",     "category": "Observability",   "pokemon": "no"  },
+    { "term": "Clefairy",           "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "DEBUG",              "category": "Log Level",       "pokemon": "no"  },
+    { "term": "ERROR",              "category": "Log Level",       "pokemon": "no"  },
+    { "term": "Exeggutor",          "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "Trace ID",           "category": "Distributed",     "pokemon": "no"  },
+    { "term": "Exception Handler",  "category": "Error Handling",  "pokemon": "no"  },
+    { "term": "Jolteon",            "category": "Pokémon",         "pokemon": "yes" }
+  ]
+}

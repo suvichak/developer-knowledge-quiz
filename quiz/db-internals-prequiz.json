@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "quizId": "db-internals",
+    "version": "1.0",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07"
+  },
+  "prequiz": {
+    "title": "How Databases Really Read and Write Data",
+    "subtitle": "Dev term or Pokémon? You decide.",
+    "description": "Before the quiz, sharpen your eye. Each card below is either a real database keyword or a Pokémon name sneaked in. Mark each one — Pokémon names won't appear in the quiz, but the real terms will. Can you tell them apart?",
+    "instruction": "For each term, decide: is it a genuine database concept, or a Pokémon in disguise?",
+    "icon": "🗄️"
+  },
+  "keywords": [
+    { "term": "ACID",                   "category": "Database",        "pokemon": "no" },
+    { "term": "Atomicity",              "category": "ACID",            "pokemon": "no" },
+    { "term": "Gengar",                 "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "Durability",             "category": "ACID",            "pokemon": "no" },
+    { "term": "Isolation",              "category": "ACID",            "pokemon": "no" },
+    { "term": "Consistency",            "category": "ACID",            "pokemon": "no" },
+    { "term": "Machamp",                "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "COMMIT",                 "category": "Transactions",    "pokemon": "no" },
+    { "term": "ROLLBACK",               "category": "Transactions",    "pokemon": "no" },
+    { "term": "SAVEPOINT",              "category": "Transactions",    "pokemon": "no" },
+    { "term": "Rapidash",               "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "Dirty Read",             "category": "Isolation",       "pokemon": "no" },
+    { "term": "Serializable",           "category": "Isolation",       "pokemon": "no" },
+    { "term": "B-tree Index",           "category": "Indexes",         "pokemon": "no" },
+    { "term": "Snorlax",                "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "Clustered Index",        "category": "Indexes",         "pokemon": "no" },
+    { "term": "Covering Index",         "category": "Indexes",         "pokemon": "no" },
+    { "term": "Connection Pool",        "category": "Connections",     "pokemon": "no" },
+    { "term": "Porygon",                "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "Write-Ahead Log (WAL)",  "category": "Internals",       "pokemon": "no" },
+    { "term": "Buffer Pool",            "category": "Internals",       "pokemon": "no" },
+    { "term": "Checkpoint",             "category": "Internals",       "pokemon": "no" },
+    { "term": "Kadabra",                "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "MVCC",                   "category": "Concurrency",     "pokemon": "no" },
+    { "term": "Deadlock",               "category": "Locking",         "pokemon": "no" },
+    { "term": "Dirty Page",             "category": "Internals",       "pokemon": "no" },
+    { "term": "Exeggutor",              "category": "Pokémon",         "pokemon": "yes" },
+    { "term": "Vacuum",                 "category": "Maintenance",     "pokemon": "no" },
+    { "term": "LSM Tree",               "category": "Storage",         "pokemon": "no" },
+    { "term": "Write Amplification",    "category": "Storage",         "pokemon": "no" }
+  ]
+}

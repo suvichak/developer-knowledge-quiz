@@ -1,0 +1,229 @@
+{
+  "meta": {
+    "id": "client-server",
+    "version": "1.0",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07",
+    "author": "Developer Knowledge Quiz",
+    "language": "en"
+  },
+  "quiz": {
+    "title": "How Client-Server Works",
+    "subtitle": "Requests, responses, and the architecture behind the web",
+    "description": "Test your understanding of client-server architecture — from basic request flows to load balancing, scaling, and proxy patterns.",
+    "category": "Web Fundamentals",
+    "tags": ["client-server", "architecture", "networking", "dns", "load-balancer"],
+    "icon": "🖥️",
+    "difficulty": "mixed",
+    "estimatedMinutes": 10
+  },
+  "settings": {
+    "shuffleQuestions": false,
+    "shuffleOptions": false,
+    "passingScore": 70,
+    "showProgressBar": true,
+    "allowRetake": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "text": "In client-server architecture, which side initiates a request?",
+      "options": [
+        { "id": "A", "text": "The server" },
+        { "id": "B", "text": "The client" },
+        { "id": "C", "text": "Both sides simultaneously" },
+        { "id": "D", "text": "A third-party broker always initiates the exchange" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "In the client-server model, the client always initiates communication by sending a request. The server listens passively and responds to incoming requests.",
+      "wrongAnswerFeedback": {
+        "A": "Servers listen and respond; they do not initiate requests in the classic client-server model.",
+        "C": "Traditional client-server is asymmetric — only the client initiates. Technologies like WebSockets enable bidirectional communication but that is a different pattern.",
+        "D": "A broker is used in message queue architectures, not the classic client-server pattern."
+      },
+      "difficulty": "easy",
+      "tags": ["client-server", "basics"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Client-Server_overview"
+    },
+    {
+      "id": 2,
+      "text": "What is the role of a server in client-server architecture?",
+      "options": [
+        { "id": "A", "text": "It browses the internet on behalf of users" },
+        { "id": "B", "text": "It provides resources or services to clients that request them" },
+        { "id": "C", "text": "It stores only static files and cannot run any logic" },
+        { "id": "D", "text": "It connects directly to end-user hardware to run applications" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A server is a program or machine that provides resources (files, data, computation) or services to clients that request them. Servers listen on a network port and respond to client requests.",
+      "wrongAnswerFeedback": {
+        "A": "Browsing is what a client (browser) does, not a server.",
+        "C": "Servers can run application logic, process data, query databases, and much more — they are not limited to static files.",
+        "D": "Servers communicate over a network; they do not connect directly to end-user hardware to run apps."
+      },
+      "difficulty": "easy",
+      "tags": ["client-server", "basics"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Client-Server_overview"
+    },
+    {
+      "id": 3,
+      "text": "What does DNS stand for and what is its primary purpose?",
+      "options": [
+        { "id": "A", "text": "Data Network Service — routes packets between servers" },
+        { "id": "B", "text": "Domain Name System — translates domain names to IP addresses" },
+        { "id": "C", "text": "Distributed Node Service — balances load across servers" },
+        { "id": "D", "text": "Dynamic Network Security — encrypts domain lookups" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "DNS (Domain Name System) acts as the internet's phone book. It translates human-readable domain names (e.g., example.com) into the IP addresses that computers use to identify each other on a network.",
+      "wrongAnswerFeedback": {
+        "A": "Packet routing is handled by routers using protocols like BGP, not DNS.",
+        "C": "Load balancing is a separate concern handled by load balancers or DNS-level round-robin.",
+        "D": "DNS over HTTPS (DoH) and DNSSEC exist for encryption, but DNS itself is the name resolution system."
+      },
+      "difficulty": "easy",
+      "tags": ["client-server", "dns", "networking"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/DNS"
+    },
+    {
+      "id": 4,
+      "text": "Which protocol is primarily used for communication between web clients and servers?",
+      "options": [
+        { "id": "A", "text": "FTP" },
+        { "id": "B", "text": "SMTP" },
+        { "id": "C", "text": "HTTP / HTTPS" },
+        { "id": "D", "text": "SSH" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "HTTP and its secure variant HTTPS are the application-layer protocols that govern how web browsers (clients) and web servers communicate. SMTP is for email, FTP for file transfer, and SSH for secure remote access.",
+      "wrongAnswerFeedback": {
+        "A": "FTP (File Transfer Protocol) is used to transfer files, not for standard web page requests.",
+        "B": "SMTP (Simple Mail Transfer Protocol) is for sending emails, not web communication.",
+        "D": "SSH (Secure Shell) provides encrypted command-line access to remote machines, not web browsing."
+      },
+      "difficulty": "easy",
+      "tags": ["client-server", "protocols"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"
+    },
+    {
+      "id": 5,
+      "text": "What is an IP address used for?",
+      "options": [
+        { "id": "A", "text": "Encrypting data sent between client and server" },
+        { "id": "B", "text": "Uniquely identifying a device on a network so data can be routed to it" },
+        { "id": "C", "text": "Storing the domain names of websites" },
+        { "id": "D", "text": "Authenticating users before they can connect to a server" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "An IP (Internet Protocol) address is a numerical label assigned to each device on a network. It serves two main functions: host or network interface identification, and location addressing — allowing packets to be routed to the correct destination.",
+      "wrongAnswerFeedback": {
+        "A": "Encryption is handled by TLS/SSL, not IP addresses.",
+        "C": "Domain names are stored and resolved by DNS, not by IP addresses.",
+        "D": "Authentication is handled by protocols like OAuth, JWT, or passwords — not by IP addresses."
+      },
+      "difficulty": "easy",
+      "tags": ["client-server", "networking", "ip"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/IP_Address"
+    },
+    {
+      "id": 6,
+      "text": "What is the key difference between a stateful and a stateless protocol?",
+      "options": [
+        { "id": "A", "text": "Stateful protocols use UDP; stateless protocols use TCP" },
+        { "id": "B", "text": "A stateful protocol retains context between requests; a stateless protocol treats each request independently" },
+        { "id": "C", "text": "Stateless protocols are faster because they use binary encoding" },
+        { "id": "D", "text": "Stateful protocols only work inside a single data center" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A stateful protocol (e.g., FTP, TCP) maintains session context: the server remembers previous interactions. A stateless protocol (e.g., HTTP) treats every request as entirely independent — the server has no memory of past requests. Statelessness makes horizontal scaling much easier, which is why sessions in web apps are often stored externally (cookies, tokens, databases).",
+      "wrongAnswerFeedback": {
+        "A": "Stateful vs. stateless is a design property at the application layer, not determined by TCP vs. UDP.",
+        "C": "Stateless protocols are not inherently faster because of encoding; their scalability advantage comes from not needing server-side session storage.",
+        "D": "Stateful protocols can span data centers; the distinction is about session context, not geography."
+      },
+      "difficulty": "hard",
+      "tags": ["client-server", "architecture", "state"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview#http_is_stateless_but_not_sessionless"
+    },
+    {
+      "id": 7,
+      "text": "In a three-tier architecture, what is the role of the middle tier (application tier)?",
+      "options": [
+        { "id": "A", "text": "It stores all persistent data for the application" },
+        { "id": "B", "text": "It renders HTML pages in the user's browser" },
+        { "id": "C", "text": "It processes business logic and mediates between the presentation tier and the data tier" },
+        { "id": "D", "text": "It handles SSL termination and serves static assets" }
+      ],
+      "correctAnswer": "C",
+      "explanation": "In three-tier architecture: the presentation tier (client/browser) handles UI, the application tier (middle) runs business logic and processes requests, and the data tier (database) stores persistent data. The application tier decouples the UI from the database, which improves maintainability and scalability.",
+      "wrongAnswerFeedback": {
+        "A": "Persistent data storage is the responsibility of the data tier (third tier), typically a database.",
+        "B": "Rendering HTML in the browser is the presentation tier's role.",
+        "D": "SSL termination and static asset serving are often handled by a reverse proxy or CDN, not the application tier."
+      },
+      "difficulty": "hard",
+      "tags": ["client-server", "architecture"],
+      "reference": "https://en.wikipedia.org/wiki/Multitier_architecture"
+    },
+    {
+      "id": 8,
+      "text": "What is the primary purpose of a load balancer in a client-server system?",
+      "options": [
+        { "id": "A", "text": "To compress responses and reduce bandwidth usage" },
+        { "id": "B", "text": "To distribute incoming client requests across multiple server instances" },
+        { "id": "C", "text": "To cache static assets closer to the end user" },
+        { "id": "D", "text": "To authenticate users before requests reach the application servers" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A load balancer sits in front of a pool of servers and distributes incoming requests among them using algorithms such as round-robin, least connections, or IP hash. This improves availability, fault tolerance, and throughput — if one server fails, the load balancer routes traffic to healthy instances.",
+      "wrongAnswerFeedback": {
+        "A": "Compression is typically configured in the web server or application (e.g., gzip), not the load balancer's primary role.",
+        "C": "Caching assets closer to users is the role of a CDN (Content Delivery Network), not a load balancer.",
+        "D": "Authentication is an application-layer concern (identity provider, API gateway); load balancers operate at layer 4 or 7 and are not authentication systems."
+      },
+      "difficulty": "hard",
+      "tags": ["client-server", "scalability", "infrastructure"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/Load_balancing"
+    },
+    {
+      "id": 9,
+      "text": "What is the difference between horizontal scaling and vertical scaling?",
+      "options": [
+        { "id": "A", "text": "Horizontal scaling adds more CPU/RAM to one machine; vertical scaling adds more machines" },
+        { "id": "B", "text": "Horizontal scaling adds more machines to a pool; vertical scaling upgrades hardware on existing machines" },
+        { "id": "C", "text": "Horizontal scaling is only possible with NoSQL databases; vertical scaling is for relational databases" },
+        { "id": "D", "text": "Both terms describe the same concept but apply to different cloud providers" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "Horizontal scaling (scale out) means adding more server instances to distribute load. Vertical scaling (scale up) means adding more resources (CPU, RAM, storage) to an existing machine. Horizontal scaling is generally preferred for stateless web applications because it offers near-unlimited capacity and better fault tolerance.",
+      "wrongAnswerFeedback": {
+        "A": "This definition is reversed — adding hardware to one machine is vertical (scale up), adding machines is horizontal (scale out).",
+        "C": "Both scaling strategies apply to any type of server or database regardless of SQL vs. NoSQL.",
+        "D": "These are standard industry terms with distinct meanings across all cloud providers and infrastructure types."
+      },
+      "difficulty": "hard",
+      "tags": ["client-server", "scalability"],
+      "reference": "https://en.wikipedia.org/wiki/Scalability#Horizontal_(scale_out)_and_vertical_scaling_(scale_up)"
+    },
+    {
+      "id": 10,
+      "text": "What is a reverse proxy and how does it differ from a forward proxy?",
+      "options": [
+        { "id": "A", "text": "A forward proxy sits in front of servers and shields them from clients; a reverse proxy sits in front of clients and shields them from servers" },
+        { "id": "B", "text": "A reverse proxy sits in front of servers and handles requests on their behalf; a forward proxy sits in front of clients and handles requests on their behalf" },
+        { "id": "C", "text": "They are the same architectural pattern with different names in different regions" },
+        { "id": "D", "text": "A reverse proxy only works with HTTPS; a forward proxy only works with HTTP" }
+      ],
+      "correctAnswer": "B",
+      "explanation": "A forward proxy acts on behalf of clients — it intercepts outbound requests and can provide anonymity, access control, or caching for the client side. A reverse proxy acts on behalf of servers — it intercepts inbound requests, hiding server details and enabling load balancing, SSL termination, compression, and caching. Nginx and HAProxy are common reverse proxies.",
+      "wrongAnswerFeedback": {
+        "A": "This swaps the positions — a reverse proxy is in front of servers (not clients), and a forward proxy is in front of clients (not servers).",
+        "C": "They are fundamentally different in placement and purpose, not regional naming variants.",
+        "D": "Both proxy types can work with HTTP and HTTPS; the protocol does not determine the proxy type."
+      },
+      "difficulty": "hard",
+      "tags": ["client-server", "architecture", "proxy"],
+      "reference": "https://developer.mozilla.org/en-US/docs/Glossary/Proxy_server"
+    }
+  ]
+}

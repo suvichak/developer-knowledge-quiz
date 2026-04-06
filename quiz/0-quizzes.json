@@ -1,6 +1,35 @@
 {
   "quizzes": [
     {
+      "id": "mssql-query",
+      "file": "quiz/mssql-query.json",
+      "prequizFile": "quiz/mssql-query-prequiz.json",
+      "title": "MSSQL Query Writing",
+      "subtitle": "Write correct T-SQL for real-world scenarios",
+      "description": "Test your ability to write Microsoft SQL Server queries — from basic SELECT statements to JOINs, aggregations, subqueries, CTEs, and CASE expressions.",
+      "category": "Database",
+      "icon": "🗄️",
+      "difficulty": "mixed",
+      "questionCount": 20,
+      "estimatedMinutes": 20,
+      "tags": ["sql", "mssql", "t-sql", "database", "queries", "joins"],
+      "featured": true
+    },
+    {
+      "id": "logging-debugging",
+      "file": "quiz/logging-debugging.json",
+      "title": "How Logs Are Used to Trace a Bug",
+      "subtitle": "From log levels to stack traces",
+      "description": "Test your understanding of how application logs work, what information they contain, and how developers use them to track down and diagnose bugs.",
+      "category": "Debugging",
+      "icon": "🪲",
+      "difficulty": "mixed",
+      "questionCount": 10,
+      "estimatedMinutes": 10,
+      "tags": ["logging", "debugging", "tracing", "observability", "error handling"],
+      "featured": true
+    },
+    {
       "id": "https",
       "file": "quiz/https.json",
       "title": "How HTTPS Works",
@@ -12,6 +41,48 @@
       "questionCount": 20,
       "estimatedMinutes": 15,
       "tags": ["https", "tls", "ssl", "security", "certificates"],
+      "featured": true
+    },
+    {
+      "id": "http",
+      "file": "quiz/http.json",
+      "title": "How HTTP Works",
+      "subtitle": "From request methods to status codes and headers",
+      "description": "Test your understanding of the HyperText Transfer Protocol — the foundation of data communication on the web.",
+      "category": "Web Fundamentals",
+      "icon": "🌐",
+      "difficulty": "mixed",
+      "questionCount": 10,
+      "estimatedMinutes": 10,
+      "tags": ["http", "web", "requests", "status-codes", "headers"],
+      "featured": false
+    },
+    {
+      "id": "client-server",
+      "file": "quiz/client-server.json",
+      "title": "How Client-Server Works",
+      "subtitle": "Requests, responses, and the architecture behind the web",
+      "description": "Test your understanding of client-server architecture — from basic request flows to load balancing, scaling, and proxy patterns.",
+      "category": "Web Fundamentals",
+      "icon": "🖥️",
+      "difficulty": "mixed",
+      "questionCount": 10,
+      "estimatedMinutes": 10,
+      "tags": ["client-server", "architecture", "networking", "dns", "load-balancer"],
+      "featured": false
+    },
+    {
+      "id": "db-internals",
+      "file": "quiz/db-internals.json",
+      "title": "How Databases Really Read and Write Data",
+      "subtitle": "Under the hood — storage, transactions, and concurrency",
+      "description": "Test your understanding of how databases physically read and write data, covering ACID, transactions, indexing, connection pooling, WAL, MVCC, buffer pools, and more.",
+      "category": "Databases",
+      "icon": "🗄️",
+      "difficulty": "mixed",
+      "questionCount": 30,
+      "estimatedMinutes": 25,
+      "tags": ["database", "acid", "transactions", "indexes", "connection-pool", "mvcc", "wal", "internals"],
       "featured": true
     },
     {

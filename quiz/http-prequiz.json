@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "quizId": "http",
+    "version": "1.0",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07"
+  },
+  "prequiz": {
+    "title": "How HTTP Works",
+    "subtitle": "Key terms before you start",
+    "description": "Review these concepts before tackling the HTTP quiz. Understanding them will help you answer questions about request methods, status codes, headers, and protocol versions.",
+    "icon": "🌐"
+  },
+  "keywords": [
+    {
+      "term": "HTTP",
+      "definition": "HyperText Transfer Protocol — the application-layer protocol used to transfer data on the Web. It is stateless and text-based, running over TCP on port 80 by default.",
+      "category": "Protocol"
+    },
+    {
+      "term": "HTTP Request",
+      "definition": "A message sent by a client (usually a browser) to a server asking for a resource or submitting data. It includes a method, URL, headers, and optionally a body.",
+      "category": "Basics"
+    },
+    {
+      "term": "HTTP Response",
+      "definition": "The server's reply to an HTTP request. It includes a status line (status code + reason phrase), headers, and optionally a body.",
+      "category": "Basics"
+    },
+    {
+      "term": "HTTP Methods",
+      "definition": "Verbs that indicate the desired action: GET (retrieve), POST (submit/create), PUT (replace), PATCH (partial update), DELETE (remove), HEAD (headers only), OPTIONS (capabilities).",
+      "category": "Methods"
+    },
+    {
+      "term": "Status Codes",
+      "definition": "Three-digit numbers in responses indicating outcome: 1xx informational, 2xx success (200 OK), 3xx redirection (301, 302), 4xx client errors (400, 401, 403, 404), 5xx server errors (500, 503).",
+      "category": "Status Codes"
+    },
+    {
+      "term": "HTTP Headers",
+      "definition": "Key-value pairs in requests and responses that carry metadata: Content-Type, Cache-Control, Authorization, Accept, Set-Cookie, etc.",
+      "category": "Headers"
+    },
+    {
+      "term": "HTTP/1.1 Keep-Alive",
+      "definition": "A feature introduced in HTTP/1.1 where a single TCP connection is reused for multiple request-response cycles, reducing connection overhead. Requests are still sequential.",
+      "category": "Performance"
+    },
+    {
+      "term": "HTTP/2 Multiplexing",
+      "definition": "An HTTP/2 feature that allows multiple requests and responses to be sent concurrently over a single TCP connection using streams, eliminating head-of-line blocking at the HTTP layer.",
+      "category": "Performance"
+    },
+    {
+      "term": "Idempotent Method",
+      "definition": "An HTTP method is idempotent if making the same request multiple times has the same effect as making it once. GET, PUT, DELETE, HEAD, and OPTIONS are idempotent. POST is not.",
+      "category": "Methods"
+    },
+    {
+      "term": "Cache-Control",
+      "definition": "An HTTP header that controls how and for how long responses are cached. Key directives: no-store (never cache), no-cache (revalidate before use), max-age (seconds until stale), private (browser only).",
+      "category": "Headers"
+    }
+  ]
+}
