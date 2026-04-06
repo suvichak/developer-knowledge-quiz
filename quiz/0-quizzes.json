@@ -1,21 +1,6 @@
 {
   "quizzes": [
     {
-      "id": "mssql-query",
-      "file": "quiz/mssql-query.json",
-      "prequizFile": "quiz/mssql-query-prequiz.json",
-      "title": "MSSQL Query Writing",
-      "subtitle": "Write correct T-SQL for real-world scenarios",
-      "description": "Test your ability to write Microsoft SQL Server queries — from basic SELECT statements to JOINs, aggregations, subqueries, CTEs, and CASE expressions.",
-      "category": "Database",
-      "icon": "🗄️",
-      "difficulty": "mixed",
-      "questionCount": 20,
-      "estimatedMinutes": 20,
-      "tags": ["sql", "mssql", "t-sql", "database", "queries", "joins"],
-      "featured": true
-    },
-    {
       "id": "logging-debugging",
       "file": "quiz/logging-debugging.json",
       "title": "How Logs Are Used to Trace a Bug",
