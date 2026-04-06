@@ -93,6 +93,5 @@ At runtime `prequiz.js` injects **2–5** random Pokémon from `pokemon.json` as
 
 Causes: opened as `file://` URL, or `quiz/0-quizzes.json` missing. Use the live URL or a local HTTP server.
 
----
-
-*Pokémon names © Nintendo / Creatures Inc. / GAME FREAK inc. Used for non-commercial educational purposes.*
+# Pokemon name for pre-quiz impostor cards is at pokemon.json,
+pokemon name for quiz is at pokemon.json, 
