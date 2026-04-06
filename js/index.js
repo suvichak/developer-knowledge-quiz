@@ -16,7 +16,7 @@ async function loadQuizzes() {
   const countEl = document.getElementById('quiz-count');
 
   try {
-    const res = await fetch('quiz/_quizzes.json');
+    const res = await fetch('quiz/0-quizzes.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data   = await res.json();
     const quizzes = data.quizzes || [];
@@ -36,7 +36,7 @@ async function loadQuizzes() {
       <div class="state-container">
         <span class="state-icon">⚠️</span>
         <p class="state-title">Could not load quizzes</p>
-        <p class="state-sub">Ensure <code>quiz/_quizzes.json</code> is present and the page is served over HTTP(S).</p>
+        <p class="state-sub">Ensure <code>quiz/0-quizzes.json</code> is present and the page is served over HTTP(S).</p>
       </div>`;
     countEl.textContent = '—';
   }
@@ -93,7 +93,7 @@ function buildAddCard() {
   div.innerHTML = `
     <div class="add-icon">+</div>
     <div class="add-title">Add a New Quiz</div>
-    <div class="add-sub">Drop a JSON file in the <code>quiz/</code> folder<br>and register it in <code>quiz/_quizzes.json</code></div>`;
+    <div class="add-sub">Drop a JSON file in the <code>quiz/</code> folder<br>and register it in <code>quiz/0-quizzes.json</code></div>`;
   return div;
 }
 

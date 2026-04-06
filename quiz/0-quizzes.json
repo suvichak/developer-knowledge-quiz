@@ -2,7 +2,7 @@
   "quizzes": [
     {
       "id": "template",
-      "file": "quiz/template.json",
+      "file": "quiz/0-template.json",
       "title": "Web Development Fundamentals",
       "subtitle": "Core concepts every web developer should know",
       "description": "Test your knowledge of HTML, CSS, JavaScript, and web development best practices.",

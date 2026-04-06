@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "quizId": "template",
+    "version": "1.1",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07"
+  },
+  "prequiz": {
+    "title": "Web Development Fundamentals",
+    "subtitle": "Dev term or Pokémon? You decide.",
+    "description": "Before the quiz, sharpen your eye. Each card below is either a real web development keyword or a Pokémon name sneaked in. Mark each one — Pokémon names won't appear in the quiz, but the real terms will. Can you tell them apart?",
+    "instruction": "For each term, decide: is it a genuine developer concept, or a Pokémon in disguise?",
+    "icon": "🌐"
+  },
+  "keywords": [
+    { "term": "HTML",                "category": "Web Basics",  "pokemon": "no" },
+    { "term": "Magikarp",            "category": "Pokémon",     "pokemon": "yes" },
+    { "term": "CSS",                 "category": "Web Basics",  "pokemon": "no" },
+    { "term": "JavaScript",          "category": "Web Basics",  "pokemon": "no" },
+    { "term": "Alakazam",            "category": "Pokémon",     "pokemon": "yes" },
+    { "term": "DOM",                 "category": "Browser",     "pokemon": "no" },
+    { "term": "HTTP",                "category": "Networking",  "pokemon": "no" },
+    { "term": "REST API",            "category": "APIs",        "pokemon": "no" },
+    { "term": "Porygon",             "category": "Pokémon",     "pokemon": "yes" },
+    { "term": "JSON",                "category": "Data",        "pokemon": "no" },
+    { "term": "CSS Flexbox",         "category": "CSS",         "pokemon": "no" },
+    { "term": "CSS Grid",            "category": "CSS",         "pokemon": "no" },
+    { "term": "Semantic HTML",       "category": "HTML",        "pokemon": "no" },
+    { "term": "Voltorb",             "category": "Pokémon",     "pokemon": "yes" },
+    { "term": "Responsive Design",   "category": "Design",      "pokemon": "no" },
+    { "term": "Accessibility (a11y)","category": "Design",      "pokemon": "no" },
+    { "term": "Event Loop",          "category": "JavaScript",  "pokemon": "no" },
+    { "term": "Geodude",             "category": "Pokémon",     "pokemon": "yes" },
+    { "term": "Promise",             "category": "JavaScript",  "pokemon": "no" },
+    { "term": "async / await",       "category": "JavaScript",  "pokemon": "no" }
+  ]
+}
