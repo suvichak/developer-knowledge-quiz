@@ -592,15 +592,24 @@ footer { padding: 20px 24px; }
   padding: 12px 14px;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
+  background: var(--bg);
+  min-height: 56px;
+  display: flex;
+  align-items: flex-start;
+  word-break: break-all;
+}
+
+.token-link {
   font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
   font-size: 11.5px;
   line-height: 1.6;
-  color: var(--text-secondary);
-  background: var(--bg);
-  resize: none;
+  color: var(--primary-blue);
+  text-decoration: none;
   word-break: break-all;
   white-space: pre-wrap;
+  width: 100%;
 }
+.token-link:hover { text-decoration: underline; }
 
 .token-verify-link {
   display: inline-block;

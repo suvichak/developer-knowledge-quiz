@@ -236,6 +236,8 @@ const engine = (() => {
     el('token-name-input').value = '';
     el('token-result').classList.add('hidden');
     el('token-name-error').classList.add('hidden');
+    const linkEl = el('token-box-link');
+    if (linkEl) { linkEl.href = '#'; linkEl.textContent = ''; }
 
     el('progress-bar').style.width = '100%';
     showView('results');
@@ -355,9 +357,13 @@ const engine = (() => {
       const payload = { v, quiz: quizTitle, name, ts, score, correct, total, passed, digest, tsaToken };
       const token   = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
 
-      el('token-box').value = token;
-      const verifyUrl = `verify.html?token=${encodeURIComponent(token)}`;
-      el('token-verify-link').href = verifyUrl;
+      // Build absolute verify URL so it works on GitHub Pages and localhost
+      const base = window.location.origin +
+        window.location.pathname.replace(/\/[^/]*$/, '/');
+      const verifyUrl = `${base}verify.html?token=${encodeURIComponent(token)}`;
+      const linkEl = el('token-box-link');
+      linkEl.href        = verifyUrl;
+      linkEl.textContent = verifyUrl;
       el('token-result').classList.remove('hidden');
       el('token-result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } catch (err) {
@@ -492,15 +498,18 @@ async function fetchTimestamp(hashBytes) {
 }
 
 function copyToken() {
-  const box = el('token-box');
-  box.select();
-  box.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(box.value).then(() => {
-    const btn = el('btn-copy-token');
+  const url  = el('token-box-link').href;
+  const btn  = el('btn-copy-token');
+  navigator.clipboard.writeText(url).then(() => {
     const prev = btn.textContent;
     btn.textContent = 'Copied!';
     setTimeout(() => { btn.textContent = prev; }, 2000);
   }).catch(() => {
+    // Fallback: select the link text
+    const range = document.createRange();
+    range.selectNode(el('token-box-link'));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
     document.execCommand('copy');
   });
 }

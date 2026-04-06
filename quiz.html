@@ -148,12 +148,11 @@
         <div id="token-result" class="token-result hidden">
           <div class="token-result-label">
             <span>🔐 Quiz Success Token</span>
-            <button class="token-copy-btn" id="btn-copy-token" onclick="copyToken()">Copy</button>
+            <button class="token-copy-btn" id="btn-copy-token" onclick="copyToken()">Copy Link</button>
           </div>
-          <textarea class="token-box" id="token-box" readonly rows="5"></textarea>
-          <a class="token-verify-link" id="token-verify-link" href="#" target="_blank" rel="noopener noreferrer">
-            Open Verification Page →
-          </a>
+          <div class="token-box">
+            <a id="token-box-link" class="token-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+          </div>
         </div>
       </div>
 
