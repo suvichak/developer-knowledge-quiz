@@ -55,36 +55,56 @@
         </div>
         <div class="hero-right">
           <div class="hero-stat">
-            <span class="hero-stat-value" id="stat-keywords">0</span>
-            <span class="hero-stat-label">Keywords</span>
-          </div>
-          <div class="hero-stat">
-            <span class="hero-stat-value" id="stat-pokemon">0</span>
-            <span class="hero-stat-label">Pokémon 👾</span>
+            <span class="hero-stat-value" id="stat-total">0</span>
+            <span class="hero-stat-label">Total Terms</span>
           </div>
         </div>
       </div>
 
-      <!-- Legend -->
-      <div class="legend">
-        <div class="legend-item">
-          <span class="legend-dot real"></span>
-          Real concept — study these!
-        </div>
-        <div class="legend-item">
-          <span class="legend-dot pokemon"></span>
-          Pokémon name — just for fun 👾
+      <!-- Game instruction -->
+      <div class="game-instruction">
+        <span class="game-instruction-icon">👆</span>
+        <div>
+          <div class="game-instruction-title">Spot the Pokémon!</div>
+          <div class="game-instruction-sub">Click every term you think is a Pokémon name — not a real developer concept. Then hit the button below to check your answers.</div>
         </div>
       </div>
 
       <!-- Grid -->
       <div id="keywords-grid" class="keywords-grid"></div>
 
+      <!-- Submit bar -->
+      <div class="submit-bar">
+        <button id="btn-submit" class="btn-submit">
+          I've marked all Pokémon names — Reveal!
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 3v6l4 2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="9" r="7" stroke="white" stroke-width="1.8"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Result legend (shown after reveal) -->
+      <div id="result-legend" class="result-legend hidden">
+        <div class="result-legend-item correct">
+          <span class="result-legend-dot"></span>
+          Correctly spotted Pokémon ✓
+        </div>
+        <div class="result-legend-item missed">
+          <span class="result-legend-dot"></span>
+          Pokémon you missed ✗
+        </div>
+        <div class="result-legend-item wrong">
+          <span class="result-legend-dot"></span>
+          Real term — not a Pokémon
+        </div>
+      </div>
+
       <!-- CTA -->
-      <div class="cta-bar">
+      <div id="cta-bar" class="cta-bar hidden">
         <div class="cta-text-wrap">
-          <div class="cta-title">Ready to test your knowledge?</div>
-          <div class="cta-sub">You've reviewed the key concepts. Time to put them to the test!</div>
+          <div class="cta-title">Ready to take the quiz?</div>
+          <div class="cta-sub">You know your Pokémon from your dev terms — now test your knowledge!</div>
         </div>
         <a id="btn-start" href="#" class="btn-start">
           Start Quiz

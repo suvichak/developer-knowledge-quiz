@@ -34,10 +34,6 @@ function shuffle(arr) {
   return a;
 }
 
-function pickRandom(arr, n) {
-  return shuffle(arr).slice(0, n);
-}
-
 /* ─────────────────────────────────────────────────────────────
    Main loader
 ───────────────────────────────────────────────────────────── */
@@ -57,17 +53,13 @@ async function loadPrequiz() {
   el('btn-start').href = quizUrl;
 
   try {
-    const [pqRes, pkRes] = await Promise.all([
-      fetch(prequizFile),
-      fetch('pokemon.json')
-    ]);
+    const pqRes = await fetch(prequizFile);
 
     if (!pqRes.ok) throw new Error(`HTTP ${pqRes.status}: ${pqRes.statusText}`);
 
-    const pqData  = await pqRes.json();
-    const pokemon = pkRes.ok ? await pkRes.json() : [];
+    const pqData = await pqRes.json();
 
-    render(pqData, pokemon);
+    render(pqData);
 
   } catch (err) {
     console.error(err);
@@ -82,7 +74,7 @@ async function loadPrequiz() {
 /* ─────────────────────────────────────────────────────────────
    Render
 ───────────────────────────────────────────────────────────── */
-function render(data, pokemonList) {
+function render(data) {
   const pq       = data.prequiz || {};
   const keywords = data.keywords || [];
 
@@ -92,46 +84,76 @@ function render(data, pokemonList) {
   el('hero-title').textContent   = pq.title || 'Keywords';
   el('hero-desc').textContent    = pq.description || '';
 
-  const pokemonCount  = pokemonList.length ? Math.floor(Math.random() * 4) + 2 : 0;
-  const chosenPokemon = pickRandom(pokemonList, pokemonCount);
+  // Build card list from the prequiz JSON (pokemon:"yes" marks the impostors)
+  const cards = shuffle(
+    keywords.map(kw => ({ term: kw.term, isPokemon: kw.pokemon === 'yes' }))
+  );
 
-  el('stat-keywords').textContent = keywords.length;
-  el('stat-pokemon').textContent  = pokemonCount;
+  el('stat-total').textContent = cards.length;
 
-  const cards = [
-    ...keywords.map(kw => ({ type: 'keyword', ...kw })),
-    ...chosenPokemon.map(name => ({
-      type: 'pokemon',
-      term: name,
-      definition: `${name} is a Pokémon — not a developer concept! All Pokémon names and characters are trademarks of The Pokémon Company and its affiliates.`,
-      category: 'Pokémon'
-    }))
-  ];
+  const selected = new Set();   // indices of cards the user clicked
+  let revealed   = false;
 
+  /* ── Build grid ── */
   const grid = el('keywords-grid');
   grid.innerHTML = '';
 
-  shuffle(cards).forEach((card, i) => {
+  cards.forEach((card, i) => {
     const div = document.createElement('div');
-    div.className = `kw-card${card.type === 'pokemon' ? ' pokemon-card' : ''}`;
+    div.className = 'kw-card';
     div.style.animationDelay = `${i * 0.04}s`;
+    div.innerHTML = `<div class="kw-term">${escHtml(card.term)}</div>`;
 
-    if (card.type === 'pokemon') {
-      div.innerHTML = `
-        <div class="kw-category">${escHtml(card.category)}</div>
-        <div class="kw-term">
-          ${escHtml(card.term)}
-          <span class="pokemon-badge">⚡ Pokémon</span>
-        </div>
-        <div class="kw-definition">${escHtml(card.definition)}</div>`;
-    } else {
-      div.innerHTML = `
-        <div class="kw-category">${escHtml(card.category || '')}</div>
-        <div class="kw-term">${escHtml(card.term)}</div>
-        <div class="kw-definition">${escHtml(card.definition || '')}</div>`;
-    }
+    div.addEventListener('click', () => {
+      if (revealed) return;
+      div.classList.toggle('selected');
+      if (selected.has(i)) selected.delete(i);
+      else selected.add(i);
+    });
 
     grid.appendChild(div);
+  });
+
+  /* ── Submit / reveal ── */
+  el('btn-submit').addEventListener('click', () => {
+    if (revealed) return;
+    revealed = true;
+
+    el('btn-submit').classList.add('hidden');
+
+    const cardEls = Array.from(grid.querySelectorAll('.kw-card'));
+    cardEls.forEach((div, i) => {
+      const card        = cards[i];
+      const wasSelected = selected.has(i);
+      const termEl      = div.querySelector('.kw-term');
+
+      div.classList.remove('selected');
+
+      if (card.isPokemon && wasSelected) {
+        // ✓ Correctly identified a Pokémon
+        div.classList.add('result-correct');
+        termEl.insertAdjacentHTML('beforeend',
+          '<span class="result-badge correct-badge">✓ Pokémon</span>');
+
+      } else if (card.isPokemon && !wasSelected) {
+        // ✗ Missed this Pokémon
+        div.classList.add('result-missed');
+        termEl.insertAdjacentHTML('beforeend',
+          '<span class="result-badge missed-badge">✗ Missed</span>');
+
+      } else if (!card.isPokemon && wasSelected) {
+        // ~ Wrongly marked a real term
+        div.classList.add('result-wrong');
+        termEl.insertAdjacentHTML('beforeend',
+          '<span class="result-badge wrong-badge">Real term</span>');
+      }
+    });
+
+    el('result-legend').classList.remove('hidden');
+    el('cta-bar').classList.remove('hidden');
+    setTimeout(() => {
+      el('cta-bar').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 300);
   });
 
   showView('content');
