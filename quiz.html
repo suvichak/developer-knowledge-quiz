@@ -129,6 +129,34 @@
         </div>
       </div>
 
+      <!-- ── Quiz Success Token Generator ──────────────────── -->
+      <div id="token-gen" class="token-gen fade-in">
+        <div class="token-gen-intro">
+          <span class="token-gen-icon">🏅</span>
+          <h3 class="token-gen-title">Get Your Quiz Success Token</h3>
+          <p class="token-gen-desc">Enter your name to generate a signed, verifiable proof of your result.</p>
+        </div>
+        <div class="token-name-row">
+          <input type="text" id="token-name-input" class="token-name-input"
+                 placeholder="Your full name" maxlength="100" autocomplete="name"
+                 onkeydown="if(event.key==='Enter')engine.requestToken()" />
+          <button class="btn btn-primary" id="btn-gen-token" onclick="engine.requestToken()">
+            Generate Token
+          </button>
+        </div>
+        <p id="token-name-error" class="token-name-error hidden">Please enter your name.</p>
+        <div id="token-result" class="token-result hidden">
+          <div class="token-result-label">
+            <span>🔐 Quiz Success Token</span>
+            <button class="token-copy-btn" id="btn-copy-token" onclick="copyToken()">Copy</button>
+          </div>
+          <textarea class="token-box" id="token-box" readonly rows="5"></textarea>
+          <a class="token-verify-link" id="token-verify-link" href="#" target="_blank" rel="noopener noreferrer">
+            Open Verification Page →
+          </a>
+        </div>
+      </div>
+
       <div class="review-section fade-in">
         <h2 class="review-title">Answer Review</h2>
         <div class="review-list" id="review-list"></div>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verify Quiz Success Token · Developer Knowledge</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/verify.css">
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <a class="back-btn" href="index.html" aria-label="Back to quiz list">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        All Quizzes
+      </a>
+      <div class="quiz-title-header" style="opacity:1;">Token Verifier</div>
+    </div>
+  </header>
+
+  <!-- ── Main ────────────────────────────────────────────────── -->
+  <main>
+
+    <div class="verify-page">
+
+      <!-- Intro -->
+      <div class="verify-intro fade-in">
+        <span class="verify-intro-icon">🔐</span>
+        <h1 class="verify-intro-title">Verify Quiz Success Token</h1>
+        <p class="verify-intro-desc">
+          Paste a Quiz Success Token below to verify its authenticity and view the
+          result it represents.
+        </p>
+      </div>
+
+      <!-- Input card -->
+      <div class="verify-card fade-in">
+        <label class="verify-label" for="verify-input">Quiz Success Token</label>
+        <textarea
+          id="verify-input"
+          class="verify-input"
+          rows="5"
+          placeholder="Paste your Base64 token here…"
+          spellcheck="false"
+          autocomplete="off"
+        ></textarea>
+        <div class="verify-actions">
+          <button class="btn btn-primary" id="btn-verify" onclick="verifier.verify()">
+            Verify Token
+          </button>
+          <button class="btn btn-secondary" id="btn-clear" onclick="verifier.clear()">
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- Result panel -->
+      <div id="verify-result" class="verify-result hidden fade-in">
+
+        <!-- Status badge -->
+        <div id="verify-status" class="verify-status"></div>
+
+        <!-- Detail rows -->
+        <div id="verify-details" class="verify-details"></div>
+
+        <!-- Raw payload (collapsible) -->
+        <details class="verify-raw-wrap">
+          <summary class="verify-raw-summary">Raw Payload</summary>
+          <pre id="verify-raw" class="verify-raw"></pre>
+        </details>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-note">
+      &copy; 2026 Developer Knowledge Quiz. Token verification uses SHA-256 (Web Crypto API) and runs entirely in your browser — no data is sent to any server.
+    </div>
+  </footer>
+
+  <script src="js/verify.js"></script>
+</body>
+</html>

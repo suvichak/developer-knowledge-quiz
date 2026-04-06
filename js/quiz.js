@@ -27,6 +27,9 @@ const engine = (() => {
   let answers = [];
   let answered = false;
 
+  // Stored for token generation after results are shown
+  let _lastResult = null;
+
   // ── Load ─────────────────────────────────────────────────
   async function load() {
     const params = new URLSearchParams(window.location.search);
@@ -220,6 +223,20 @@ const engine = (() => {
     const passingScore = (quiz.settings?.passingScore) ?? 70;
     const passed      = pct >= passingScore;
 
+    // Store for token generation
+    _lastResult = {
+      quizTitle: (quiz.quiz?.title) || 'Quiz',
+      score: pct,
+      correct,
+      total,
+      passed,
+    };
+
+    // Reset token UI each time results are shown
+    el('token-name-input').value = '';
+    el('token-result').classList.add('hidden');
+    el('token-name-error').classList.add('hidden');
+
     el('progress-bar').style.width = '100%';
     showView('results');
 
@@ -304,7 +321,38 @@ const engine = (() => {
     start();
   }
 
-  return { load, start, retake };
+  // ── Request token (validate name then generate) ───────────
+  async function requestToken() {
+    const nameInput = el('token-name-input');
+    const name = nameInput.value.trim();
+    if (!name) {
+      el('token-name-error').classList.remove('hidden');
+      nameInput.focus();
+      return;
+    }
+    el('token-name-error').classList.add('hidden');
+
+    const btn = el('btn-gen-token');
+    btn.disabled = true;
+    btn.textContent = 'Generating…';
+
+    try {
+      const token = await buildToken(name, _lastResult);
+      el('token-box').value = token;
+      const verifyUrl = `verify.html?token=${encodeURIComponent(token)}`;
+      el('token-verify-link').href = verifyUrl;
+      el('token-result').classList.remove('hidden');
+      el('token-result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+      console.error('Token generation failed:', err);
+      alert('Token generation failed. Please try again.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Generate Token';
+    }
+  }
+
+  return { load, start, retake, requestToken };
 })();
 
 /* ─────────────────────────────────────────────────────────────
@@ -341,3 +389,46 @@ function animateCountUp(el, from, to, duration, format) {
    Boot
 ───────────────────────────────────────────────────────────── */
 engine.load();
+
+/* ─────────────────────────────────────────────────────────────
+   Quiz Success Token
+───────────────────────────────────────────────────────────── */
+
+/**
+ * Build a tamper-evident Quiz Success Token.
+ * Payload fields are joined into a canonical string and hashed with
+ * SHA-256 (Web Crypto API). The full payload + digest is Base64 encoded.
+ *
+ * @param {string} name
+ * @param {{ quizTitle:string, score:number, correct:number, total:number, passed:boolean }} result
+ * @returns {Promise<string>} Base64 token
+ */
+async function buildToken(name, result) {
+  const v  = 1;
+  const ts = new Date().toISOString();
+  const { quizTitle, score, correct, total, passed } = result;
+
+  // Canonical string — order and separator must match verify.js exactly
+  const canonical = [v, quizTitle, name, ts, score, correct, total, passed ? '1' : '0'].join('|');
+  const msgBuf  = new TextEncoder().encode(canonical);
+  const hashBuf = await crypto.subtle.digest('SHA-256', msgBuf);
+  const digest  = Array.from(new Uint8Array(hashBuf))
+    .map(b => b.toString(16).padStart(2, '0')).join('');
+
+  const payload = { v, quiz: quizTitle, name, ts, score, correct, total, passed, digest };
+  return btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+}
+
+function copyToken() {
+  const box = el('token-box');
+  box.select();
+  box.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(box.value).then(() => {
+    const btn = el('btn-copy-token');
+    const prev = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = prev; }, 2000);
+  }).catch(() => {
+    document.execCommand('copy');
+  });
+}
