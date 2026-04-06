@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "quizId": "mssql-query-concepts",
+    "version": "1.0",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07"
+  },
+  "prequiz": {
+    "title": "MSSQL Query Concepts Keywords",
+    "subtitle": "Key terms for understanding SQL Server queries.",
+    "description": "Review these core concepts before starting the quiz. Some impostor terms (Pokémon) are mixed in for fun!",
+    "icon": "🗄️"
+  },
+  "keywords": [
+    { "term": "SELECT", "definition": "Statement used to retrieve data from tables.", "category": "Query" },
+    { "term": "JOIN", "definition": "Combines rows from two or more tables based on a related column.", "category": "Query" },
+    { "term": "WHERE", "definition": "Clause to filter rows in a query.", "category": "Query" },
+    { "term": "GROUP BY", "definition": "Clause to aggregate rows based on column values.", "category": "Aggregation" },
+    { "term": "HAVING", "definition": "Clause to filter groups after aggregation.", "category": "Aggregation" },
+    { "term": "ORDER BY", "definition": "Clause to sort the result set.", "category": "Sorting" },
+    { "term": "INDEX", "definition": "Database structure that improves query performance.", "category": "Performance" },
+    { "term": "CTE", "definition": "Common Table Expression, a temporary result set for organizing queries.", "category": "Query Structure" },
+    { "term": "TOP", "definition": "Limits the number of rows returned.", "category": "Query" },
+    { "term": "NULL", "definition": "Represents missing or unknown data.", "category": "Data" },
+    { "term": "Transaction", "definition": "A sequence of operations performed as a single logical unit.", "category": "ACID" },
+    { "term": "Isolation Level", "definition": "Controls visibility of changes between transactions.", "category": "ACID" },
+    { "term": "Deadlock", "definition": "A situation where two or more transactions block each other.", "category": "Concurrency" },
+    { "term": "Subquery", "definition": "A query nested inside another query.", "category": "Query" },
+    { "term": "Alias", "definition": "Temporary name for a table or column in a query.", "category": "Query" },
+    { "term": "Magikarp", "definition": "Pokémon impostor! Not a SQL concept.", "category": "Pokémon" },
+    { "term": "DISTINCT", "definition": "Removes duplicate rows from the result set.", "category": "Query" },
+    { "term": "Execution Plan", "definition": "SQL Server's strategy for running a query.", "category": "Performance" },
+    { "term": "Parameterization", "definition": "Using parameters in queries to improve security and performance.", "category": "Security" },
+    { "term": "Pikachu", "definition": "Pokémon impostor! Not a SQL concept.", "category": "Pokémon" }
+  ]
+}
